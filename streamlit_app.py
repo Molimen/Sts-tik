@@ -29,9 +29,9 @@ spelling_bee_words = [
 #hmtl
 st.markdown("""
             <h3>Spelling Bee Minigame</h3>
-            """)
+            """, unsafe_allow_html=True)
 #css
 st.markdown("""
             <style>
             </style>
-            """)
+            """, unsafe_allow_html=True)
