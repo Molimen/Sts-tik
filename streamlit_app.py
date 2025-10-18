@@ -64,9 +64,9 @@ spelling_bee_words = {
     ]
 }
 #BAGIAN HMTL
-selected2 = option_menu("Menu Navigasi", ["Home", "Ekstra", "Tentang Kami"],
+selected2 = option_menu("Menu Navigasi", ["Home", "Ekstra", "About Us"],
                         icons=['house', 'tools', "info-square-fill"],
-                        menu_icon="cast", default_index=0, orientation="vertical")
+                        menu_icon="cast", default_index=0, orientation="horizontal")
 st.write('elu milih', selected2)
 if selected2 == "Home": #minigame disini
     st.write('kode elu')
@@ -84,5 +84,6 @@ st.markdown("""
             
             </style>
             """, unsafe_allow_html=True)
+
 
 
