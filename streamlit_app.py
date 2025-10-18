@@ -69,7 +69,7 @@ selected2 = option_menu("Menu Navigasi", ["Home", "Ekstra", "Tentang Kami"],
                         menu_icon="cast", default_index=0, orientation="horizontal")
 st.write('elu milih', selected2)
 if selected2 == "Home": #minigame disini
-    #kode elu
+    st.write('kode elu')
 elif selected2 == "Ekstra": # 'ekstra' sama 'tentang kami' full HTML + CSS karna ga perlu backend
     st.markdown("""
                 
@@ -84,3 +84,4 @@ st.markdown("""
             
             </style>
             """, unsafe_allow_html=True)
+
