@@ -2,7 +2,12 @@ import streamlit as st
 import time
 import random
 from streamlit_option_menu import option_menu
+import base64
 
+def get_base64(file_path):
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+ekstra1 = get_base64("image.jpg")
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
     "easy": [
@@ -64,15 +69,24 @@ spelling_bee_words = {
     ]
 }
 #BAGIAN HMTL
-selected2 = option_menu("Menu Navigasi", ["Home", "Ekstra", "About Us"],
-                        icons=['house-door', 'tools', "info-square-fill"],
-                        menu_icon="cast", default_index=0, orientation="horizontal")
-st.write('elu milih', selected2)
-if selected2 == "Home": #minigame disini
-    st.write('kode elu')
+selected2 = option_menu("Menu Navigasi", ["Minigame", "Ekstra", "Tentang Kami"],
+                        icons=['house', 'tools', "info-square-fill"],
+                        menu_icon="cast", default_index=0, orientation="horizontal",
+                        styles={"nav-link-selected": {'background-color' : '#e4e800', 'color' : 'black', 'border' : '3px solid #b07f04'},
+                                "container" : {'background-color' : '#e8c100', 'color' : 'black', 'border' : '3px solid black'},
+                                })
+if selected2 == "Minigame": #minigame disini
+    st.write('elu milih', selected2) #line 71 cuma testing
+    #kode elu
 elif selected2 == "Ekstra": # 'ekstra' sama 'tentang kami' full HTML + CSS karna ga perlu backend
-    st.markdown("""
-                
+    st.markdown(f"""
+                <div class='container1'>
+                    <div class='imgcontainer1'>
+                        <img id="gambar1" src="data:image/jpg;base64,{ekstra1}" alt="gambar random">
+                        <div class="linkbtn1"><a href='https://layout-tempat-duduk-generator.streamlit.app/'>Kunjungi Situsnya</a></div>                     
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate dolorem doloribus ea error esse fugit illum ipsam laboriosam magni minus molestias nemo, officia omnis optio reiciendis vitae voluptates voluptatum!</p>
+                </div>
                 """, unsafe_allow_html=True)
 elif selected2 == "Tentang Kami":
     st.markdown("""
@@ -81,11 +95,32 @@ elif selected2 == "Tentang Kami":
 #BAGIAN CSS
 st.markdown("""
             <style>
+            .container1 {
+            max-width:90%;margin:auto;border: 2px solid blue;text-align: center;height:300px;
+            }
+            .imgcontainer1 {
+            border:2px solid black;
+            max-width:30%;
+            height:300px;
+            float:left;
+            }
             
+            #gambar1 {
+            height: 215px;
+            border-radius: 15px;
+            border: 5px solid black;
+            margin-bottom: 15px;
+            text-align: center;
+            }
+            .linkbtn1 {
+            background-color: #3cba64;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            }
+            .linkbtn1 a {
+            font-size: 1.15em;
+            text-decoration: none;
+            }
             </style>
             """, unsafe_allow_html=True)
-
-
-
-
-
