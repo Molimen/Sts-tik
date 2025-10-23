@@ -52,16 +52,18 @@ st.html("""
         width: 175px;
         box-sizing: border-box;
         padding: 6px;
-        border-radius: 12px;
-        animation : glow 2s ease infinite;
+        position: relative;
         }
-        .img1 {
-        background-image: linear-gradient(120deg,#23c902, #db221f, #49dbde, #fcba03);
-        animation-delay: 0.33s;
+        .img1::before{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
         }
-        .img2 {
-        background-image: linear-gradient(188deg,#1f4edb, #db451f, #b2db1f, #db1f74);
-        animation-delay: 0.95s;
+        .img2::before {
+        
         }
         
         .link1 {
