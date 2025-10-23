@@ -4,6 +4,9 @@ import random
 import base64
 from streamlit_extras.stylable_container import stylable_container
 
+# TO-DO
+# BEFORE RELEASE, PLEASE FIX THE LANG!
+
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
@@ -137,6 +140,7 @@ with st.sidebar:
         if st.button("", key="sidebar_btn_games"):
             st.query_params.clear()
             st.query_params["select"] = "games"
+            st.query_params["start"] = "false"
 
     st.markdown(
         """
@@ -164,7 +168,7 @@ with st.sidebar:
     with stylable_container(key="sidebar_about", css_styles=button_sidebar_about):
         if st.button("",key="sidebar_btn_about"):
             st.query_params.clear()
-            st.query_params["select"] = "extras"
+            st.query_params["select"] = "about"
 
     st.markdown(
         """
@@ -174,3 +178,22 @@ with st.sidebar:
         """,
         unsafe_allow_html=True
     )
+
+print(params)
+
+if params:
+    if params.get("select") == "games":
+        if params.get("start") == "false":
+            if st.button("start"):
+                st.query_params["start"] = "true"
+                st.rerun()
+        elif params.get("start") == "true":
+            diff = st.selectbox(
+            "Difficulty:",
+            ["Easy bos", "okayy", "hard", "DESPAIR"])
+
+            if st.button("Play"):
+                st.query_params.clear()
+                st.query_params["select"] = "games"
+                st.query_params["Play"] = diff
+                st.rerun()
