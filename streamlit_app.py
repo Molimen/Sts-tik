@@ -1,13 +1,15 @@
 import streamlit as st
 import time
 import random
-from streamlit_option_menu import option_menu
 import base64
+from streamlit_extras.stylable_container import stylable_container
 
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
+
 ekstra1 = get_base64("sts_tik_extra_img1.jpg")
+
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
     "easy": [
@@ -68,60 +70,107 @@ spelling_bee_words = {
         "microorganism", "hydrodynamics", "bioengineering", "chargoggagoggmanchauggagoggchaubunagungamaugg"
     ]
 }
-#BAGIAN HMTL
-selected2 = option_menu("Menu Navigasi", ["Minigame", "Ekstra", "Tentang Kami"],
-                        icons=['house', 'tools', "info-square-fill"],
-                        menu_icon="cast", default_index=0, orientation="horizontal",
-                        styles={"nav-link-selected": {'background-color' : '#e4e800', 'color' : 'black', 'border' : '3px solid #b07f04'},
-                                "container" : {'background-color' : '#e8c100', 'color' : 'black', 'border' : '3px solid black'},
-                                })
-if selected2 == "Minigame": #minigame disini
-    st.write('elu milih', selected2) #line 71 cuma testing
-    #kode elu
-elif selected2 == "Ekstra": # 'ekstra' sama 'tentang kami' full HTML + CSS karna ga perlu backend
-    st.markdown(f"""
-                <div class='container1'>
-                    <div class='imgcontainer1'>
-                        <img id="gambar1" src="data:image/jpg;base64,{ekstra1}" alt="gambar random">
-                        <div class="linkbtn1"><a href='https://layout-tempat-duduk-generator.streamlit.app/'>Kunjungi Situsnya</a></div>                     
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate dolorem doloribus ea error esse fugit illum ipsam laboriosam magni minus molestias nemo, officia omnis optio reiciendis vitae voluptates voluptatum!</p>
-                </div>
-                """, unsafe_allow_html=True)
-elif selected2 == "Tentang Kami":
-    st.markdown("""
-                
-                """, unsafe_allow_html=True)
-#BAGIAN CSS
-st.markdown("""
-            <style>
-            .container1 {
-            max-width:90%;margin:auto;border: 2px solid blue;text-align: center;height:300px;
-            }
-            .imgcontainer1 {
-            border:2px solid black;
-            max-width:30%;
-            height:300px;
-            float:left;
-            }
-            
-            #gambar1 {
-            height: 215px;
-            border-radius: 15px;
-            border: 5px solid black;
-            margin-bottom: 15px;
-            text-align: center;
-            }
-            .linkbtn1 {
-            background-color: #3cba64;
-            padding: 10px;
-            width: 100%;
-            border-radius: 8px;
-            }
-            .linkbtn1 a {
-            font-size: 1.15em;
-            text-decoration: none;
-            }
-            </style>
-            """, unsafe_allow_html=True)
 
+params = st.query_params
+
+st.markdown("""
+<style>
+[data-testid="stSidebar"] {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# background-image: url('data:image/png;base64,{get_base64("kelompok.png")}');
+
+button_sidebar_games = f"""
+button {{
+    width: 60px;
+    height: 60px; 
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+button_sidebar_extras = f"""
+button {{
+    width: 60px;
+    height: 60px; 
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+button_sidebar_about = f"""
+button {{
+    width: 60px;
+    height: 60px; 
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #2b74d4;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+}}
+"""
+
+with st.sidebar:
+    with stylable_container(key="sidebar_games", css_styles=button_sidebar_games):
+        if st.button("", key="sidebar_btn_games"):
+            st.query_params.clear()
+            st.query_params["select"] = "games"
+
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>Games</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    with stylable_container(key="sidebar_tempat_extras", css_styles=button_sidebar_extras):
+        if st.button("",key="sidebar_btn_tempat_duduk"):
+            st.query_params.clear()
+            st.query_params["select"] = "extras"
+
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>Extras</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    with stylable_container(key="sidebar_about", css_styles=button_sidebar_about):
+        if st.button("",key="sidebar_btn_about"):
+            st.query_params.clear()
+            st.query_params["select"] = "extras"
+
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
+                <span style='text-align: center;font-size:0.8rem;'>About Us</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
