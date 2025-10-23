@@ -3,8 +3,33 @@ import base64
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
-ekstra1 = get_base64("image.jpg")
+ekstra1 = get_base64("sts_tik_extra_img1.jpg")
+#exo itu weight antara 100-900 terus uniquifier cuma nama class (arima weight antara 100-700)
+st.html("""
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+        
+        .exo-2-namaprojek {
+        font-family: "Exo 2", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        }
 
+        .bbh-sans-bogle-regular {
+        font-family: "BBH Sans Bogle", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        .arima-isi {
+        font-family: "Arima", system-ui;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        }
+        </style>
+        """)
 st.markdown(
     f"""
     <style>
@@ -19,16 +44,16 @@ st.markdown(
     """, unsafe_allow_html=True)
 st.html(f"""
         <div class="container">
-            <h1>EKSTRA</h1>
+            <h1 class='bbh-sans-bogle-regular' >EKSTRA</h1>
             <hr style="background-color: white;margin:25px;">
             <img class="img1" src="data:image/jpg;base64,{ekstra1}">
-            <div class="title">Tempat Duduk Generator</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur doloremque doloribus illo ipsam minus quae repudiandae. Amet consequatur deleniti eum inventore, laudantium neque quis quod repellendus soluta veniam.</p>
+            <div class="title exo-2-namaprojek">Tempat Duduk Generator</div>
+            <p class="arima-isi">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur doloremque doloribus illo ipsam minus quae repudiandae. Amet consequatur deleniti eum inventore, laudantium neque quis quod repellendus soluta veniam.</p>
             <span class="link1"><a href="https://layout-tempat-duduk-generator.streamlit.app/" target="_blank">Kunjungi situsnya</a></span>
         <hr style="background-color: white;margin:25px;">
             <img class="img2" src="data:image/jpg;base64,{ekstra1}">
-            <div class="title">Kelompok Generator</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur doloremque doloribus illo ipsam minus quae repudiandae. Amet consequatur deleniti eum inventore, laudantium neque quis quod repellendus soluta veniam.</p>
+            <div class="title exo-2-namaprojek">Kelompok Generator</div>
+            <p class="arima-isi">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias consequatur doloremque doloribus illo ipsam minus quae repudiandae. Amet consequatur deleniti eum inventore, laudantium neque quis quod repellendus soluta veniam.</p>
             <span class="link2"><a href="https://kelompok.streamlit.app/" target="_blank">Kunjungi situsnya</a></span>
         </div>
         """)
@@ -52,25 +77,23 @@ st.html("""
         width: 175px;
         box-sizing: border-box;
         padding: 6px;
-        position: relative;
+        border-radius: 12px;
+        animation : glow 2s ease infinite;
         }
-        .img1::before{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
+        .img1 {
+        background-image: linear-gradient(120deg,#23c902, #db221f, #49dbde, #fcba03);
+        animation-delay: 0.33s;
         }
-        .img2::before {
-        
+        .img2 {
+        background-image: linear-gradient(188deg,#1f4edb, #db451f, #b2db1f, #db1f74);
+        animation-delay: 0.95s;
         }
         
         .link1 {
         border-radius: 50px;
         border: 3px solid black;
         background-color: #f5d671;
-        color: white;
+        color: green;
         padding: 10px;
         display: inline-block;
         width: 250px;
@@ -91,6 +114,9 @@ st.html("""
         a {
         text-decoration: none;
         font-weight: bold;
+        background-image: linear-gradient(90deg,black,#525252);
+        background-clip: text;
+        color: transparent;
         }
         
         .title {
