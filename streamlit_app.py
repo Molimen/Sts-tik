@@ -195,5 +195,6 @@ if params:
             if st.button("Play"):
                 st.query_params.clear()
                 st.query_params["select"] = "games"
-                st.query_params["Play"] = diff
+                st.query_params["play"] = diff
                 st.rerun()
+
