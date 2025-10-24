@@ -3,6 +3,7 @@ import time
 import random
 import base64
 from streamlit_extras.stylable_container import stylable_container
+import extra
 
 # TO-DO
 # BEFORE RELEASE, PLEASE FIX THE LANG!
@@ -88,12 +89,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# background-image: url('data:image/png;base64,{get_base64("kelompok.png")}');
 
 button_sidebar_games = f"""
 button {{
     width: 60px;
-    height: 60px; 
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("games.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -108,7 +109,8 @@ button:hover {{
 button_sidebar_extras = f"""
 button {{
     width: 60px;
-    height: 60px; 
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("extra.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -123,7 +125,8 @@ button:hover {{
 button_sidebar_about = f"""
 button {{
     width: 60px;
-    height: 60px; 
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("about.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -179,8 +182,6 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-print(params)
-
 if params:
     if params.get("select") == "games":
         if params.get("start") == "false":
@@ -197,4 +198,5 @@ if params:
                 st.query_params["select"] = "games"
                 st.query_params["play"] = diff
                 st.rerun()
-
+    elif params.get("select") == "extras":
+        extra.extra_menu()
