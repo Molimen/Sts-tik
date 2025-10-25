@@ -28,14 +28,13 @@ def games():
     if st.session_state.game_state == 0:
         timer_placeholder = st.empty()
         progress_placeholder = st.empty()
-        print("A")
+
         st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
         st.write(st.session_state.word)
 
         user_input = st.text_input("Type the word here:")
 
         while 1:
-            print("A")
             elapsed = -(st.session_state.time - math.floor(time.time()) )
 
             if user_input:
@@ -71,7 +70,6 @@ def games():
     elif st.session_state.game_state == 3:
         st.error("TIME UP MY NIG")
         st.markdown(f"The correct spelling was **{st.session_state.word}**")
-        print("A")
         if st.button("Back"):
             games_reset()
             st.rerun()
@@ -308,5 +306,6 @@ elif params:
             games()
     elif params.get("select") == "extras":
         extra.extra_menu()
+
 
 
