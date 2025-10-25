@@ -4,6 +4,8 @@ import random
 import base64
 from streamlit_extras.stylable_container import stylable_container
 import extra
+import time
+import math
 
 # TO-DO
 # BEFORE RELEASE, PLEASE FIX THE LANG!
@@ -11,6 +13,26 @@ import extra
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
+
+
+def games():
+    pass
+
+params = st.query_params
+placeholder = st.empty()
+
+if "start" not in st.session_state:
+    st.session_state.start = False
+if "diff" not in st.session_state:
+    st.session_state.diff = ""
+if "play" not in st.session_state:
+    st.session_state.play = False
+if "word" not in st.session_state:
+    st.session_state.word = ""
+if "time" not in st.session_state:
+    st.session_state.time = math.floor(time.time())
+if "game_over" not in st.session_state:
+    st.session_state.game_over = False
 
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
@@ -73,8 +95,6 @@ spelling_bee_words = {
     ]
 }
 
-params = st.query_params
-
 st.markdown("""
 <style>
 [data-testid="stSidebar"] {
@@ -86,7 +106,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 button_sidebar_games = f"""
 button {{
@@ -141,7 +160,13 @@ with st.sidebar:
         if st.button("", key="sidebar_btn_games"):
             st.query_params.clear()
             st.query_params["select"] = "games"
-            st.query_params["start"] = "false"
+            # reset all logic
+            st.session_state.start = False
+            st.session_state.diff = ""
+            st.session_state.play = False
+            st.session_state.word = ""
+            st.session_state.time = math.floor(time.time())
+            st.session_state.game_over = False
 
     st.markdown(
         """
@@ -180,21 +205,27 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-if params:
+
+if not params:
+    st.query_params.clear()
+    st.query_params["select"] = "games"
+elif params:
     if params.get("select") == "games":
-        if params.get("start") == "false":
-            if st.button("start"):
-                st.query_params["start"] = "true"
+        if st.session_state.start == False:
+            if st.button("Start"):
+                st.session_state.start = True
                 st.rerun()
-        elif params.get("start") == "true":
+        elif st.session_state.start == True and st.session_state.play == False:
             diff = st.selectbox(
             "Difficulty:",
             ["Easy bos", "okayy", "hard", "DESPAIR"])
 
             if st.button("Play"):
-                st.query_params.clear()
-                st.query_params["select"] = "games"
-                st.query_params["play"] = diff
+                st.session_state.diff = diff
+                st.session_state.play = True
+                st.session_state.word = random.choice(spelling_bee_words.get("easy" if diff == "Easy bos" else "medium" if diff == "okayy" else "hard" if diff == "hard" else "very_hard" if diff == "DESPAIR" else ""))
                 st.rerun()
+        elif st.session_state.start == True and st.session_state.play == True:
+            games()
     elif params.get("select") == "extras":
         extra.extra_menu()
