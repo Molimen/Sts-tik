@@ -14,9 +14,74 @@ def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
+def games_reset():
+    st.session_state.start = False
+    st.session_state.diff = ""
+    st.session_state.play = False
+    st.session_state.word = ""
+    st.session_state.time = 0
+    st.session_state.game_state = 0
+    st.session_state.user_input = ""
 
 def games():
-    pass
+    TIME_LIMIT = 10 if st.session_state.diff == "Easy bos" else 8 if st.session_state.diff == "okayy" else 7 if st.session_state.diff == "hard" else 15 if st.session_state.diff == "DESPAIR" else 0.11037
+    if st.session_state.game_state == 0:
+        timer_placeholder = st.empty()
+        progress_placeholder = st.empty()
+
+        st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
+        st.write(st.session_state.word)
+
+        user_input = st.text_input("Type the word here:")
+
+        while 1:
+            elapsed = -(st.session_state.time - math.floor(time.time()) )
+
+            if user_input:
+                st.session_state.game_state = 1
+                st.session_state.user_input = user_input
+                break
+
+            if elapsed > TIME_LIMIT:
+                st.session_state.game_state = 3
+                break
+
+            timer_placeholder.markdown(f"⏳ **Time left: {elapsed} seconds**")
+            progress_placeholder.progress(elapsed / TIME_LIMIT)
+
+        st.rerun()
+    elif st.session_state.game_state == 1:
+        st.text("your input:")
+        st.code(st.session_state.user_input)
+
+        if st.button("check"):
+            if st.session_state.user_input.strip().lower() == st.session_state.word.lower():
+                st.session_state.game_state = 2
+            else:
+                st.session_state.game_state = 4
+            st.rerun()
+    elif st.session_state.game_state == 2:
+        st.success("YOU WIN!")
+        st.session_state.score += 1
+
+        if st.button("Back"):
+            games_reset()
+            st.rerun()
+    elif st.session_state.game_state == 3:
+        st.error("TIME UP MY NIG")
+        st.markdown(f"The correct spelling was **{st.session_state.word}**")
+
+        if st.button("Back"):
+            games_reset()
+            st.rerun()
+    elif st.session_state.game_state == 4:
+        st.error("WRONG WORD")
+        st.markdown(f"The correct spelling was **{st.session_state.word}**")
+
+        if st.button("Back"):
+            games_reset()
+            st.rerun()
+
 
 params = st.query_params
 placeholder = st.empty()
@@ -30,9 +95,19 @@ if "play" not in st.session_state:
 if "word" not in st.session_state:
     st.session_state.word = ""
 if "time" not in st.session_state:
-    st.session_state.time = math.floor(time.time())
-if "game_over" not in st.session_state:
-    st.session_state.game_over = False
+    st.session_state.time = 0
+if "game_state" not in st.session_state:
+    st.session_state.game_state = 0
+# 0 mean nothing
+# 1 mean checking
+# 2 mean win
+# 3 mean lose on time
+# 4 mean lose on wrong word
+
+if "user_input" not in st.session_state:
+    st.session_state.user_input = ""
+if "score" not in st.session_state:
+    st.session_state.score = 0
 
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
@@ -77,8 +152,8 @@ spelling_bee_words = {
         "innovation", "intellect", "legitimate", "manipulate", "profound"
     ],
 
-    # 👑 VERY HARD — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
-    "very_hard": [
+    # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
+    "extreme": [
         "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
         "antidisestablishmentarianism", "sesquipedalian", "xylophonist", "schadenfreude",
         "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
@@ -91,9 +166,12 @@ spelling_bee_words = {
         "photosynthesis", "metallurgy", "thermodynamics", "epistemology", "telekinesis",
         "disenfranchisement", "incomprehensible", "institutionalization", "counterintuitive",
         "electromagnetism", "anthropomorphism", "photosensitive", "neurotransmitter",
-        "microorganism", "hydrodynamics", "bioengineering", "chargoggagoggmanchauggagoggchaubunagungamaugg"
+        "microorganism", "hydrodynamics", "bioengineering"
     ]
 }
+
+# none existance word on dict.youdao
+# "chargoggagoggmanchauggagoggchaubunagungamaugg"
 
 st.markdown("""
 <style>
@@ -160,13 +238,7 @@ with st.sidebar:
         if st.button("", key="sidebar_btn_games"):
             st.query_params.clear()
             st.query_params["select"] = "games"
-            # reset all logic
-            st.session_state.start = False
-            st.session_state.diff = ""
-            st.session_state.play = False
-            st.session_state.word = ""
-            st.session_state.time = math.floor(time.time())
-            st.session_state.game_over = False
+            games_reset()
 
     st.markdown(
         """
@@ -181,6 +253,7 @@ with st.sidebar:
         if st.button("",key="sidebar_btn_tempat_duduk"):
             st.query_params.clear()
             st.query_params["select"] = "extras"
+            games_reset()
 
     st.markdown(
         """
@@ -195,6 +268,7 @@ with st.sidebar:
         if st.button("",key="sidebar_btn_about"):
             st.query_params.clear()
             st.query_params["select"] = "about"
+            games_reset()
 
     st.markdown(
         """
@@ -209,13 +283,16 @@ with st.sidebar:
 if not params:
     st.query_params.clear()
     st.query_params["select"] = "games"
+    st.rerun()
 elif params:
     if params.get("select") == "games":
-        if st.session_state.start == False:
+        if not st.session_state.start:
+            st.markdown(f"### 🏆 Score: {st.session_state.score}")
+
             if st.button("Start"):
                 st.session_state.start = True
                 st.rerun()
-        elif st.session_state.start == True and st.session_state.play == False:
+        elif st.session_state.start and not st.session_state.play:
             diff = st.selectbox(
             "Difficulty:",
             ["Easy bos", "okayy", "hard", "DESPAIR"])
@@ -223,9 +300,10 @@ elif params:
             if st.button("Play"):
                 st.session_state.diff = diff
                 st.session_state.play = True
-                st.session_state.word = random.choice(spelling_bee_words.get("easy" if diff == "Easy bos" else "medium" if diff == "okayy" else "hard" if diff == "hard" else "very_hard" if diff == "DESPAIR" else ""))
+                st.session_state.word = random.choice(spelling_bee_words.get("easy" if diff == "Easy bos" else "medium" if diff == "okayy" else "hard" if diff == "hard" else "extreme" if diff == "DESPAIR" else ""))
+                st.session_state.time = math.floor(time.time())
                 st.rerun()
-        elif st.session_state.start == True and st.session_state.play == True:
+        elif st.session_state.start and st.session_state.play:
             games()
     elif params.get("select") == "extras":
         extra.extra_menu()
