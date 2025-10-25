@@ -48,6 +48,7 @@ def games():
 
             timer_placeholder.markdown(f"⏳ **Time left: {elapsed} seconds**")
             progress_placeholder.progress(elapsed / TIME_LIMIT)
+            time.sleep(.5)
 
         st.rerun()
     elif st.session_state.game_state == 1:
@@ -306,6 +307,7 @@ elif params:
             games()
     elif params.get("select") == "extras":
         extra.extra_menu()
+
 
 
 
