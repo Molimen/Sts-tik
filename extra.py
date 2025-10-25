@@ -7,7 +7,6 @@ def get_base64(file_path):
 
 ekstra1 = get_base64("sts_tik_extra_img1.jpg")
 ekstra2 = get_base64("sts_tik_extra_img2.jpg")
-ekstra3 = get_base64("bg106.jpg")
 st.markdown("""
             <style>
             @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
@@ -45,10 +44,6 @@ st.html(f"""
         color: white;
         font-size: 7em;
         margin: 0;
-        background-image: url(data:image/jpg;base64,{ekstra3});
-        background-clip: text;
-        background-position: center;
-        object-fit: cover;
     }}
     p {{
         color: white;
@@ -232,3 +227,4 @@ st.html(f"""
     </div>
     
 """)
+
