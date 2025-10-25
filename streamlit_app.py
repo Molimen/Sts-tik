@@ -12,8 +12,6 @@ def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
 
-ekstra1 = get_base64("sts_tik_extra_img1.jpg")
-
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
     "easy": [
