@@ -28,7 +28,7 @@ def games():
     if st.session_state.game_state == 0:
         timer_placeholder = st.empty()
         progress_placeholder = st.empty()
-
+        print("A")
         st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
         st.write(st.session_state.word)
 
@@ -307,3 +307,4 @@ elif params:
             games()
     elif params.get("select") == "extras":
         extra.extra_menu()
+
