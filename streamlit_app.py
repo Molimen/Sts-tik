@@ -59,6 +59,8 @@ def games():
         if st.button("check"):
             if st.session_state.user_input.strip().lower() == st.session_state.word.lower():
                 st.session_state.game_state = 2
+            elif st.session_state.user_input.strip().lower() == "umazing":
+                st.session_state.game_state = 5
             else:
                 st.session_state.game_state = 4
             st.rerun()
@@ -82,7 +84,13 @@ def games():
         if st.button("Back"):
             games_reset()
             st.rerun()
+    elif st.session_state.game_state == 5:
+        st.video("https://www.dropbox.com/scl/fi/co11y78kegminf70r2phr/get.mp4?rlkey=hlgnnoc33j74e5nco2e84etpc&st=lxql8ov8&raw=1")
+        st.markdown(f"The correct spelling was **{st.session_state.word}**")
 
+        if st.button("Back"):
+            games_reset()
+            st.rerun()
 
 params = st.query_params
 placeholder = st.empty()
