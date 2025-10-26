@@ -15,6 +15,7 @@ def get_base64(file_path):
         return base64.b64encode(f.read()).decode()
 
 def games_reset():
+    print("b")
     st.session_state.start = False
     st.session_state.diff = ""
     st.session_state.play = False
@@ -63,9 +64,9 @@ def games():
             st.rerun()
     elif st.session_state.game_state == 2:
         st.success("YOU WIN!")
-        st.session_state.score += 1
 
         if st.button("Back"):
+            st.session_state.score += 1
             games_reset()
             st.rerun()
     elif st.session_state.game_state == 3:
@@ -98,7 +99,8 @@ if "time" not in st.session_state:
     st.session_state.time = 0
 if "game_state" not in st.session_state:
     st.session_state.game_state = 0
-# 0 mean nothing
+# -1 mean nothing to do
+# 0 mean start
 # 1 mean checking
 # 2 mean win
 # 3 mean lose on time
