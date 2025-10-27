@@ -185,6 +185,37 @@ spelling_bee_words = {
 
 st.markdown("""
 <style>
+/* 🎯 Only target sidebar expand button icon */
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"] {
+    position: relative;
+    color: transparent !important; /* hide original */
+}
+
+/* 🟢 Replace expand icon */
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"]::after {
+    content: "Menu";   /* new expand icon */
+    color: rgba(250, 250, 250, 0.6); !important;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 🔵 Replace collapse icon */
+[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"]::after {
+    content: "Menu";    /* new collapse icon */
+    color: rgba(250, 250, 250, 0.6); !important;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
 [data-testid="stSidebar"] {
     width: 100px;
     min-width: 100px;
