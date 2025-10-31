@@ -6,7 +6,7 @@ from streamlit_extras.stylable_container import stylable_container
 import extra
 import time
 import math
-
+import about_us
 # TO-DO
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
@@ -228,7 +228,7 @@ button_sidebar_games = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("games.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/games.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -244,7 +244,7 @@ button_sidebar_extras = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("extra.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/extra.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -260,7 +260,7 @@ button_sidebar_about = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("about.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/about.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -346,7 +346,6 @@ elif params:
             games()
     elif params.get("select") == "extras":
         extra.extra_menu()
-
-
-
+    elif params.get("select") == "about":
+        about_us.abt_us()
 

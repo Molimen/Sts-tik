@@ -5,8 +5,8 @@ def extra_menu():
         with open(file_path, "rb") as f:
             return base64.b64encode(f.read()).decode()
     
-    ekstra1 = get_base64("sts_tik_extra_img1.jpg")
-    ekstra2 = get_base64("sts_tik_extra_img2.jpg")
+    ekstra1 = get_base64("assets/extra_img1.jpg")
+    ekstra2 = get_base64("assets/extra_img2.jpg")
     st.markdown("""
                 <style>
                 @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
