@@ -26,32 +26,26 @@ def abt_us():
             </div>  
         </div>
         
-        <div class="desktop-only">
-            <div class="maincontainer">
-                    <div class="imagecontainer1">
-                        <img src="https://avatars.githubusercontent.com/u/95009791?v=4">
-                    </div>
-                    <div class="expandable-info">
-                        <div class="info-title1 momo-trust-display-regular">Hover mouse ke sini!</div>
-                        <br><br>
-                        <div class="info-content arima-isi">{abt_us_1}</div>
-                    </div>
-                <div class="divider-container2">
-                    <div class="divider"></div>
+        <div class="maincontainer">
+                <div class="imagecontainer1">
+                    <img src="https://avatars.githubusercontent.com/u/95009791?v=4">
                 </div>
-                    <div class="imagecontainer2">
-                        <img src="https://avatars.githubusercontent.com/u/230108871?v=4">
-                    </div>
-                    <div class="expandable-info">
-                        <div class="info-title2 momo-trust-display-regular">Hover mouse ke sini!</div>
-                        <br><br>
-                        <div class="info-content arima-isi">{abt_us_2}</div>
-                    </div>
+                <div class="expandable-info">
+                    <div class="info-title1 momo-trust-display-regular">Hover mouse ke sini!</div>
+                    <br><br>
+                    <div class="info-content arima-isi">{abt_us_1}</div>
+                </div>
+            <div class="divider-container2">
+                <div class="divider"></div>
             </div>
-        </div>
-
-        <div class="mobile-only">
-            <p>womp womp.</p>
+                <div class="imagecontainer2">
+                    <img src="https://avatars.githubusercontent.com/u/230108871?v=4">
+                </div>
+                <div class="expandable-info">
+                    <div class="info-title2 momo-trust-display-regular">Hover mouse ke sini!</div>
+                    <br><br>
+                    <div class="info-content arima-isi">{abt_us_2}</div>
+                </div>
         </div>
 
     <style>

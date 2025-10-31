@@ -8,6 +8,7 @@ import time
 import math
 import about_us
 # TO-DO
+# add a few round!
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
 def get_base64(file_path):
