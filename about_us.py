@@ -5,9 +5,9 @@ def get_base64(file_path):
         return base64.b64encode(f.read()).decode()
 img1 = get_base64("assets/bg106.jpg")
 
-abt_us_1 = """A hobbyist who is trying to learn programming!"""
+abt_us_1 = '''A hobbyist who is trying to learn programming! <br><br> My quote: <br> "I'm gonna find the truth."'''
 
-abt_us_2 = """Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto aspernatur fugiat necessitatibus, non reiciendis temporibus voluptates! Ad animi consectetur eum facere neque quo ullam vel. Accusamus atque ducimus excepturi fugiat?"""
+abt_us_2 = '''{insert_here} <br><br> My quote: <br> "Your friend lacked the Wit to sustain her run towards the end of the hackathon."'''
 def abt_us():
     st.markdown(
         '''
