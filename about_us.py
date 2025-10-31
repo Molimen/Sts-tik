@@ -43,8 +43,8 @@ def abt_us():
                     <img src="https://avatars.githubusercontent.com/u/230108871?v=4">
                 </div>
                 <div class="expandable-info">
-                    <div class="desktop-only"><div class="info-title1 momo-trust-display-regular">Hover mouse ke sini!</div></div>
-                    <div class="mobile-only"><div class="info-title1 momo-trust-display-regular">Pencet ke sini!</div></div>
+                    <div class="desktop-only"><div class="info-title2 momo-trust-display-regular">Hover mouse ke sini!</div></div>
+                    <div class="mobile-only"><div class="info-title2 momo-trust-display-regular">Pencet ke sini!</div></div>
                     <br><br>
                     <div class="info-content arima-isi">{abt_us_2}</div>
                 </div>
