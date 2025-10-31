@@ -1,12 +1,14 @@
 import streamlit as st
 import base64
+
+def get_base64(file_path):
+    with open(file_path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
+ekstra1 = get_base64("assets/extra_img1.jpg")
+ekstra2 = get_base64("assets/extra_img2.jpg")
+
 def extra_menu():
-    def get_base64(file_path):
-        with open(file_path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    
-    ekstra1 = get_base64("assets/extra_img1.jpg")
-    ekstra2 = get_base64("assets/extra_img2.jpg")
     st.markdown("""
                 <style>
                 @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
