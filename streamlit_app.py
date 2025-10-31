@@ -15,7 +15,6 @@ def get_base64(file_path):
         return base64.b64encode(f.read()).decode()
 
 def games_reset():
-    print("b")
     st.session_state.start = False
     st.session_state.diff = ""
     st.session_state.play = False
@@ -107,7 +106,6 @@ if "time" not in st.session_state:
     st.session_state.time = 0
 if "game_state" not in st.session_state:
     st.session_state.game_state = 0
-# -1 mean nothing to do
 # 0 mean start
 # 1 mean checking
 # 2 mean win
