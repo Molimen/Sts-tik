@@ -3,7 +3,7 @@ import base64
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
-img1 = get_base64("assets/extra.png")
+img1 = get_base64("assets/bg106.jpg")
 
 abt_us_1 = """A hobbyist who is trying to learn programming!"""
 
