@@ -81,7 +81,7 @@ def abt_us():
             }}
             .imagecontainer1 img, .imagecontainer2 img {{
             box-sizing: border-box;
-            margin: 1em 1em 1.6em 1em;
+            margin: 1em 1em 2.1em 1em;
             height: 9.25em;
             aspect-ratio: 16:9;
             border: 5px solid #6674BD;
