@@ -225,6 +225,18 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+#st.markdown("""
+#<style>
+#body, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stToolbar"] {
+#    cursor: url("https://cur.cursors-4u.net/cursors/cur-2/cur116.cur"), auto !important;
+#}
+
+#button, a, [role="button"] {
+#    cursor: url("https://cur.cursors-4u.net/cursors/cur-2/cur113.cur"), pointer !important;
+#}
+#</style>
+#""", unsafe_allow_html=True)
+
 button_sidebar_games = f"""
 button {{
     width: 60px;
