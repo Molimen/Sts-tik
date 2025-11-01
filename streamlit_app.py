@@ -320,7 +320,7 @@ with st.sidebar:
     )
 
 
-if not params:
+if params.get("select", "") == "":
     st.query_params.clear()
     st.query_params["select"] = "games"
     st.rerun()
