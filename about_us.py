@@ -7,7 +7,7 @@ img1 = get_base64("assets/bg106.jpg")
 
 abt_us_1 = '''A hobbyist who is trying to learn programming! <br><br> My quote: <br> "I'm gonna find the truth."'''
 
-abt_us_2 = '''{insert_here} <br><br> My quote: <br> "Your friend lacked the Wit to sustain her run towards the end of the hackathon."'''
+abt_us_2 = '''Gw ceplox21, alias murid yang namanya cuma sekata itu. Kontribusiku di sini ngerjain bagian <b>Frontend</b> karena aku sendiri dah lumayan paham dan ada pengalaman HTML sama CSS.<br><br>--- Quote kecil ---<br>"Don't be afraid of a rejection, because it's a path to success."'''
 def abt_us():
     st.markdown(
         '''
