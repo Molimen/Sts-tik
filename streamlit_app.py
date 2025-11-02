@@ -16,107 +16,72 @@ def get_base64(file_path):
         return base64.b64encode(f.read()).decode()
 
 def games_reset():
-    st.session_state.start = False
+    if st.session_state.round == ROUND and st.session_state.round != 0:
+        st.session_state.score += st.session_state.correct / ROUND
+
+    st.session_state.menu_select = 0
     st.session_state.diff = ""
-    st.session_state.play = False
-    st.session_state.word = ""
+    st.session_state.round = 1
     st.session_state.time = 0
-    st.session_state.game_state = 0
-    st.session_state.user_input = ""
+    st.session_state.answer = []
+    st.session_state.correct = 0
+
+ROUND = 3
 
 def games():
     TIME_LIMIT = 10 if st.session_state.diff == "Easy bos" else 8 if st.session_state.diff == "okayy" else 7 if st.session_state.diff == "hard" else 15 if st.session_state.diff == "DESPAIR" else 0.11037
-    if st.session_state.game_state == 0:
-        timer_placeholder = st.empty()
-        progress_placeholder = st.empty()
 
-        st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
-        st.write(st.session_state.word)
+    st.markdown(f"<h4>Round: {'{:02d}'.format(st.session_state.round)}/{ROUND}</h4>", unsafe_allow_html=True)
 
-        user_input = st.text_input("Type the word here:")
+    timer_placeholder = st.empty()
+    progress_placeholder = st.empty()
 
-        while 1:
-            elapsed = -(st.session_state.time - math.floor(time.time()) )
+    st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
+    st.write(st.session_state.word)
 
-            if user_input:
-                st.session_state.game_state = 1
-                st.session_state.user_input = user_input
-                break
+    user_input = st.text_input("Type the word here:")
 
-            if elapsed > TIME_LIMIT:
-                st.session_state.game_state = 3
-                break
+    while 1:
+        elapsed = -(st.session_state.time - math.floor(time.time()))
 
-            timer_placeholder.markdown(f"⏳ **Time left: {elapsed} seconds**")
-            progress_placeholder.progress(elapsed / TIME_LIMIT)
-            time.sleep(.5)
+        if user_input:
+            st.session_state.answer.append([user_input,1 if user_input.strip().lower() == st.session_state.word.lower() else 3, st.session_state.word])
+            if user_input.strip().lower() == st.session_state.word.lower():
+                st.session_state.correct += 1 if st.session_state.diff == "Easy bos" else 2 if st.session_state.diff == "okayy" else 4 if st.session_state.diff == "hard" else 8 if st.session_state.diff == "DESPAIR" else 0
+            break
 
-        st.rerun()
-    elif st.session_state.game_state == 1:
-        st.text("your input:")
-        st.code(st.session_state.user_input)
+        if elapsed > TIME_LIMIT:
+            st.session_state.answer.append([user_input,2, st.session_state.word])
+            break
 
-        if st.button("check"):
-            if st.session_state.user_input.strip().lower() == st.session_state.word.lower():
-                st.session_state.game_state = 2
-            elif st.session_state.user_input.strip().lower() == "umazing":
-                st.session_state.game_state = 5
-            else:
-                st.session_state.game_state = 4
-            st.rerun()
-    elif st.session_state.game_state == 2:
-        st.success("YOU WIN!")
+        timer_placeholder.markdown(f"⏳ *Time: {elapsed} seconds*")
+        progress_placeholder.progress(elapsed / TIME_LIMIT)
+        time.sleep(.5)
 
-        if st.button("Back"):
-            st.session_state.score += 1
-            games_reset()
-            st.rerun()
-    elif st.session_state.game_state == 3:
-        st.error("TIME UP MY NIG")
-        st.markdown(f"The correct spelling was **{st.session_state.word}**")
-        if st.button("Back"):
-            games_reset()
-            st.rerun()
-    elif st.session_state.game_state == 4:
-        st.error("WRONG WORD")
-        st.markdown(f"The correct spelling was **{st.session_state.word}**")
-
-        if st.button("Back"):
-            games_reset()
-            st.rerun()
-    elif st.session_state.game_state == 5:
-        st.video("https://www.dropbox.com/scl/fi/co11y78kegminf70r2phr/get.mp4?rlkey=hlgnnoc33j74e5nco2e84etpc&st=lxql8ov8&raw=1")
-        st.markdown(f"The correct spelling was **{st.session_state.word}**")
-
-        if st.button("Back"):
-            games_reset()
-            st.rerun()
+    st.session_state.menu_select = 4
+    st.rerun()
 
 params = st.query_params
 placeholder = st.empty()
 
-if "start" not in st.session_state:
-    st.session_state.start = False
-if "diff" not in st.session_state:
-    st.session_state.diff = ""
-if "play" not in st.session_state:
-    st.session_state.play = False
-if "word" not in st.session_state:
-    st.session_state.word = ""
-if "time" not in st.session_state:
-    st.session_state.time = 0
-if "game_state" not in st.session_state:
-    st.session_state.game_state = 0
-# 0 mean start
-# 1 mean checking
-# 2 mean win
-# 3 mean lose on time
-# 4 mean lose on wrong word
-
-if "user_input" not in st.session_state:
-    st.session_state.user_input = ""
+if "menu_select" not in st.session_state:
+    st.session_state.menu_select = 0
 if "score" not in st.session_state:
     st.session_state.score = 0
+if "diff" not in st.session_state:
+    st.session_state.diff = ""
+if "round" not in st.session_state:
+    st.session_state.round = 1
+if "time" not in st.session_state:
+    st.session_state.time = 0
+if "answer" not in st.session_state:
+    st.session_state.answer = []
+if "word" not in st.session_state:
+    st.session_state.word = ""
+if "correct" not in st.session_state:
+    st.session_state.correct = 0
+
+st.set_page_config(page_title="Spelling Bee", page_icon="assets/icon.png")
 
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
@@ -225,17 +190,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-#st.markdown("""
-#<style>
-#body, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stToolbar"] {
-#    cursor: url("https://cur.cursors-4u.net/cursors/cur-2/cur116.cur"), auto !important;
-#}
+st.markdown(f"""
+<style>
+body, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stToolbar"] {{
+    cursor: url('data:image/png;base64,{get_base64("assets/pointer.png")}') 16 16, auto !important;
+}}
 
-#button, a, [role="button"] {
-#    cursor: url("https://cur.cursors-4u.net/cursors/cur-2/cur113.cur"), pointer !important;
-#}
-#</style>
-#""", unsafe_allow_html=True)
+button, a, [role="button"] {{
+    cursor: url('data:image/png;base64,{get_base64("assets/link.png")}') 16 16, pointer !important;
+}}
+</style>
+""", unsafe_allow_html=True)
 
 button_sidebar_games = f"""
 button {{
@@ -338,25 +303,51 @@ if params.get("select", "") == "":
     st.rerun()
 elif params:
     if params.get("select") == "games":
-        if not st.session_state.start:
-            st.markdown(f"### 🏆 Score: {st.session_state.score}")
+        match st.session_state.menu_select:
+            case 0:
+                st.markdown("<h2 style='text-align: center;'>Spelling Bee Game</h2>", unsafe_allow_html=True)
+                st.markdown(f"<h4>Score: {'{:.2f}'.format(st.session_state.score)}</h4>", unsafe_allow_html=True)
+                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
+                if st.button("Start"): 
+                    st.session_state.menu_select = 1
+                    st.rerun()
+            case 1:
+                st.markdown(f"""<h4>Rules:<br><br>1. yap<br>2. yap2</h4>""", unsafe_allow_html=True)
+                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
+                if st.button("I'm understand"): 
+                    st.session_state.menu_select = 2
+                    st.rerun()
+            case 2:
+                diff = st.selectbox(
+                "select difficulty:",
+                ["Easy bos", "okayy", "hard", "DESPAIR"])
+                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
+                if st.button("Play"): 
+                    st.session_state.menu_select = 3
+                    st.session_state.diff = diff
+                    st.session_state.time = math.floor(time.time())
+                    st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
+                    st.rerun()
+            case 3:
+                games()
+            case 4:
+                if st.session_state.round != ROUND:
+                    st.markdown(f"<h4>Round: {'{:02d}'.format(st.session_state.round+1)}/{ROUND}</h4>", unsafe_allow_html=True)
+                    if st.button("Ready"):
+                        st.session_state.menu_select = 3
+                        st.session_state.round += 1
+                        st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
+                        st.session_state.time = math.floor(time.time())
+                        st.rerun()
+                elif st.session_state.round == ROUND:
+                    for i in range(len(st.session_state.answer)):
+                        st.markdown(f"""<div style="background-color:{"#173828" if st.session_state.answer[i][1] == 1 else "#3e2328"};border-radius:8px;padding:10px;line-height:1.5;">
+                            {"Round:"} {'{:02d}'.format(i+1)}/{ROUND}<br>{"Time out" if st.session_state.answer[i][0] == "" else st.session_state.answer[i][0]}<br>{"Correct answer:"} {st.session_state.answer[i][2]}</div><br>""", unsafe_allow_html=True)
+                        
+                    if st.button("Back"):
+                        games_reset()
+                        st.rerun()
 
-            if st.button("Start"):
-                st.session_state.start = True
-                st.rerun()
-        elif st.session_state.start and not st.session_state.play:
-            diff = st.selectbox(
-            "Difficulty:",
-            ["Easy bos", "okayy", "hard", "DESPAIR"])
-
-            if st.button("Play"):
-                st.session_state.diff = diff
-                st.session_state.play = True
-                st.session_state.word = random.choice(spelling_bee_words.get("easy" if diff == "Easy bos" else "medium" if diff == "okayy" else "hard" if diff == "hard" else "extreme" if diff == "DESPAIR" else ""))
-                st.session_state.time = math.floor(time.time())
-                st.rerun()
-        elif st.session_state.start and st.session_state.play:
-            games()
     elif params.get("select") == "extras":
         extra.extra_menu()
     elif params.get("select") == "about":
