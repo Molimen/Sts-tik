@@ -62,7 +62,7 @@ def games_reset():
     st.session_state.answer = []
     st.session_state.correct = 0
 
-ROUND = 3
+ROUND = 15
 
 def games():
     TIME_LIMIT = 10 if st.session_state.diff == "Easy bos" else 8 if st.session_state.diff == "okayy" else 7 if st.session_state.diff == "hard" else 15 if st.session_state.diff == "DESPAIR" else 0.11037
@@ -563,4 +563,5 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
