@@ -163,21 +163,17 @@ spelling_bee_words = {
     ],
 
     # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
-    "extreme": [
-        "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
-        "antidisestablishmentarianism", "sesquipedalian", "xylophonist", "schadenfreude",
-        "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
-        "pulchritudinous", "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution",
-        "paradigm", "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
-        "cacophony", "vicissitude", "lachrymose", "philanthropy", "soliloquy", "anachronism",
-        "sagacious", "verisimilitude", "bildungsroman", "existentialism", "magnanimous",
-        "obstreperous", "susceptibility", "supererogatory", "recalcitrant", "parallelogrammatic",
-        "psychology", "antagonist", "audiovisual", "circumference", "cryptography",
-        "photosynthesis", "metallurgy", "thermodynamics", "epistemology", "telekinesis",
-        "disenfranchisement", "incomprehensible", "institutionalization", "counterintuitive",
-        "electromagnetism", "anthropomorphism", "photosensitive", "neurotransmitter",
-        "microorganism", "hydrodynamics", "bioengineering"
-    ]
+    "extreme": ['lachrymose', 'lugubrious', 'antidisestablishmentarianism', 'xylophonist', 'floccinaucinihilipilification', 'ubiquitous', 'metallurgy', 
+                'anachronism', 'telekinesis', 'existentialism', 'pseudonym', 'philanthropy', 'photosynthesis', 
+                'neurotransmitter', 'antagonist', 'verisimilitude', 'pneumonoultramicroscopicsilicovolcanoconiosis', 'circumference', 'synecdoche', 
+                'bildungsroman', 'recalcitrant', 'circumlocution', 'susceptibility',
+                'supererogatory', 'perspicacious', 'bioengineering', 'juxtaposition', 'microorganism',
+                'hippopotomonstrosesquipedaliophobia', 'paradigm', 'schadenfreude', 'metamorphosis',
+                'anthropomorphism', 'counterintuitive', 'audiovisual', 'cacophony', 'magnanimous', 'institutionalization',
+                'parallelogrammatic', 'incomprehensible', 'vicissitude', 'mnemonic', 'epistemology', 'photosensitive', 'obstreperous',
+                'chargoggagoggmanchauggagoggchaubunagungamaugg', 'soliloquy', 
+                'pulchritudinous', 'psychology', 'idiosyncrasy', 'cryptography', 'euphemism', 
+                'sagacious', 'hydrodynamics', 'disenfranchisement', 'thermodynamics', 'quintessential', 'electromagnetism', 'sesquipedalian']
 }
 
 # none existance word on dict.youdao
@@ -563,5 +559,6 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
 
