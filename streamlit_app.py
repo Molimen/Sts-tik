@@ -11,6 +11,42 @@ import about_us
 # add a few round!
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
+#FRONTEND'S TO-DO
+# line ~311
+
+st.markdown("""
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Acme&family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Momo+Trust+Display&display=swap');            
+            
+            .momo-trust-display-regular {
+            font-family: "Momo Trust Display", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            }
+            .bbh-sans-bogle-regular {
+            font-family: "BBH Sans Bogle", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            }
+            .arima-isi {
+            font-family: "Arima", system-ui;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            line-height: 1.75em;
+            }
+            .acme-regular {
+            font-family: "Acme", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            }
+            
+            * {
+            user-select: none;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
@@ -296,7 +332,6 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-
 if params.get("select", "") == "":
     st.query_params.clear()
     st.query_params["select"] = "games"
@@ -305,16 +340,192 @@ elif params:
     if params.get("select") == "games":
         match st.session_state.menu_select:
             case 0:
-                st.markdown("<h2 style='text-align: center;'>Spelling Bee Game</h2>", unsafe_allow_html=True)
-                st.markdown(f"<h4>Score: {'{:.2f}'.format(st.session_state.score)}</h4>", unsafe_allow_html=True)
+                st.html(f"""
+                        <div class="title-container">
+                            <div class="title-spelling bbh-sans-bogle-regular">Spelling</div>
+                            <div class="title-bee bbh-sans-bogle-regular">Bee</div>
+                            <img class="title-image" src='data:image/png;base64,{get_base64("assets/games-title-art-img.jpg")}' alt="Bee image here">
+                        </div>
+                        <div class="divider-container">
+                            <div class="divider"></div>
+                        </div>
+                        <div class"text-container">
+                            <div class="text-title momo-trust-display-regular">Apa itu Spelling Bee?</div>
+                            <div class="text-content arima-isi">Spelling bee adalah sebuah kontes edukasi dan kompetitif di mana peserta diuji kemampuannya mengeja kata-kata (umumnya bahasa Inggris) secara lisan. Seorang pembaca akan memberikan kata, dan peserta harus menyebutkan urutan huruf-hurufnya dengan benar untuk maju ke babak berikutnya. Kompetisi ini bertujuan untuk meningkatkan penguasaan kosa kata, ejaan, dan pemahaman bahasa secara mendalam.</div>
+                        </div>
+                        <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
+                        
+                        <style>
+                        .rainbow-text {{
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        font-size: 2rem;
+                        text-align: center;
+                        background-color: white;
+                        background-clip: text;
+                        color: transparent;
+                        margin: 1.75em 0em 0em 0em;
+                        animation: rainbow 5s linear infinite;
+                        }}
+                        
+                        .title-container {{
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        height: 15em;
+                        max-width: 100%;
+                        position: relative;
+                        justify-content: center;
+                        align-items: left;
+                        left: 1em;
+                        flex-wrap: wrap;
+                        left: 0;
+                        padding-left: 2.25em;
+                        padding-right: 2.25em;
+                        margin-bottom: 2.15em;
+                        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+                        z-index: 2;
+                        border-radius: 2em;
+                        border: 8px solid darkorange;
+                        }}
+                        
+                        .title-spelling, .title-bee {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        max-width: 6.55em;
+                        min-width: 4em;
+                        height: 1.65em;
+                        font-size: 2.55em;
+                        border-radius: .5rem;
+                        z-index: 2;
+                        margin: 0.3rem;
+                        }}
+                        
+                        .title-spelling {{
+                        background-color: #e8b125;
+                        color: black;
+                        border: 6px solid #a88019;
+                        border-radius: 1.5em .25em .65em 0em; 
+                        }}
+                        
+                        .title-bee {{
+                        background-color: #8c6500;
+                        color: white;
+                        border: 6px solid #5e4401;
+                        border-radius: .65em 0em 1.5em .25em;
+                        }}
+                        
+                        .title-image {{
+                        display: flex;
+                        height: 135px;
+                        margin: 1rem;
+                        text-align: center;
+                        padding: auto;
+                        object-fit: contain;
+                        transform: rotate(-7deg);
+                        animation: bee 2.25s ease-in-out infinite;
+                        }}
+                        
+                        .text-container {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        }}
+                        
+                        .text-title {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.3em;
+                        }}
+                        
+                        .text-content {{
+                        text-align: center;
+                        }}
+                        
+                        @keyframes bee {{
+                            0% {{
+                            transform: rotate(-7deg);
+                            }}
+                            50% {{
+                            transform: rotate(18deg);
+                            }}
+                        }}
+                        @keyframes rainbow {{
+                        0% {{background-color: white}}
+                        12.5% {{background-color: red}}
+                        25% {{background-color: yellow}}
+                        37.5% {{background-color: green}}
+                        50% {{background-color: cyan}}
+                        62.5% {{background-color: blue}}
+                        75% {{background-color: pink}}
+                        87.5% {{background-color: purple}}
+                        100% {{background-color: white}}
+                        }}
+                        
+                        @media (max-width: 650px) {{
+                            .title-image {{
+                            display: none;
+                            }}
+                            
+                            .title-spelling, .title-bee {{
+                            max-width: 100%;
+                            }}
+                        }}
+                        </style>
+                        """)
+                st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>skornya gak permanen btw</sup></h4>
+                            <style>
+                            .heading4 {{
+                            text-align: center;
+                            }}
+                            
+                            sup {{
+                            font-size: .5em;
+                            }}
+                            
+                            [data-testid="stMarkdownContainer"] a[href^="#"] {{
+                            display: none !important;
+                            }}
+                            </style>
+                            """, unsafe_allow_html=True)
                 # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
-                if st.button("Start"): 
-                    st.session_state.menu_select = 1
-                    st.rerun()
+
+                css_style = """ 
+                    button {
+                    display: flex; 
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    width: 200px;
+                    height: 10px;
+                    background-color: green;
+                    border: 3px solid #4CAF50;
+                    border-radius: 50px;
+                    padding: 20px;
+                    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+                    transition: all .25s ease;
+                    font-weight: bold;
+                    }
+                    
+                    button:hover {
+                    border: 3px solid #999999;
+                    transition: all .25s ease;
+                    }
+                    """
+
+                with stylable_container(key="style", css_styles=css_style):
+                    with stylable_container(key="center1",
+                                            css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                        if st.button("Mulai Permainan"):
+                            st.session_state.menu_select = 1
+                            st.rerun()
             case 1:
                 st.markdown(f"""<h4>Rules:<br><br>1. yap<br>2. yap2</h4>""", unsafe_allow_html=True)
                 # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
-                if st.button("I'm understand"): 
+                if st.button("I understand"):
                     st.session_state.menu_select = 2
                     st.rerun()
             case 2:
