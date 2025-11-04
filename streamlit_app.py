@@ -12,7 +12,7 @@ import about_us
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
 #FRONTEND'S TO-DO
-# line 644
+# line ~311
 
 st.markdown("""
             <style>
@@ -43,50 +43,6 @@ st.markdown("""
             
             * {
             user-select: none;
-            }
-            
-            [data-testid="stMarkdownContainer"] a[href^="#"] {
-            display: none !important;
-            }
-            
-            @keyframes divider-spin {
-            0% { transform: rotate(0deg); }
-            5.88% { transform: rotate(0deg); }
-            11.76% { transform: rotate(45deg); }
-            17.64% { transform: rotate(45deg); }
-            23.52% { transform: rotate(90deg); }
-            29.4% { transform: rotate(90deg); }
-            35.28% { transform: rotate(135deg); }
-            41.16% { transform: rotate(135deg); }
-            47.04% { transform: rotate(180deg); }
-            52.92% { transform: rotate(180deg); }
-            58.8% { transform: rotate(225deg); }
-            64.68% { transform: rotate(225deg); }
-            70.56% { transform: rotate(270deg); }
-            76.44% { transform: rotate(270deg); }
-            82.32% { transform: rotate(315deg); }
-            88.2% { transform: rotate(315deg); }
-            100% { transform: rotate(360deg); }
-            }
-            @keyframes bg-divider-scale {
-            0% { transform:  scale(1); }
-            5.88% { transform:  scale(1); }
-            11.76% { transform:  scale(1.25); }
-            17.64% { transform:  scale(1.25); }
-            23.52% { transform:  scale(1); }
-            29.4% { transform:  scale(1); }
-            35.28% { transform:  scale(1.25); }
-            41.16% { transform:  scale(1.25); }
-            47.04% { transform:  scale(1); }
-            52.92% { transform:  scale(1); }
-            58.8% { transform:  scale(1.25); }
-            64.68% { transform:  scale(1.25); }
-            70.56% { transform:  scale(1); }
-            76.44% { transform:  scale(1); }
-            82.32% { transform:  scale(1.25); }
-            88.2% { transform: scale(1.25); }
-            94.08% { transform: scale(1); }
-            100% { transform: scale(1); }
             }
             </style>
             """, unsafe_allow_html=True)
@@ -207,24 +163,21 @@ spelling_bee_words = {
     ],
 
     # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
-    "extreme": [
-        "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
-        "antidisestablishmentarianism", "sesquipedalian", "xylophonist","chargoggagoggmanchauggagoggchaubunagungamaugg", "schadenfreude",
-        "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
-        "pulchritudinous", "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution",
-        "paradigm", "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
-        "cacophony", "vicissitude", "lachrymose", "philanthropy", "soliloquy", "anachronism",
-        "sagacious", "verisimilitude", "bildungsroman", "existentialism", "magnanimous",
-        "obstreperous", "susceptibility", "supererogatory", "recalcitrant", "parallelogrammatic",
-        "psychology", "antagonist", "audiovisual", "circumference", "cryptography",
-        "photosynthesis", "metallurgy", "thermodynamics", "epistemology", "telekinesis",
-        "disenfranchisement", "incomprehensible", "institutionalization", "counterintuitive",
-        "electromagnetism", "anthropomorphism", "photosensitive", "neurotransmitter",
-        "microorganism", "hydrodynamics", "bioengineering"
-    ]
+    "extreme": ['lachrymose', 'lugubrious', 'antidisestablishmentarianism', 'xylophonist', 'floccinaucinihilipilification', 'ubiquitous', 'metallurgy', 
+                'anachronism', 'telekinesis', 'existentialism', 'pseudonym', 'philanthropy', 'photosynthesis', 
+                'neurotransmitter', 'antagonist', 'verisimilitude', 'pneumonoultramicroscopicsilicovolcanoconiosis', 'circumference', 'synecdoche', 
+                'bildungsroman', 'recalcitrant', 'circumlocution', 'susceptibility',
+                'supererogatory', 'perspicacious', 'bioengineering', 'juxtaposition', 'microorganism',
+                'hippopotomonstrosesquipedaliophobia', 'paradigm', 'schadenfreude', 'metamorphosis',
+                'anthropomorphism', 'counterintuitive', 'audiovisual', 'cacophony', 'magnanimous', 'institutionalization',
+                'parallelogrammatic', 'incomprehensible', 'vicissitude', 'mnemonic', 'epistemology', 'photosensitive', 'obstreperous',
+                'chargoggagoggmanchauggagoggchaubunagungamaugg', 'soliloquy', 
+                'pulchritudinous', 'psychology', 'idiosyncrasy', 'cryptography', 'euphemism', 
+                'sagacious', 'hydrodynamics', 'disenfranchisement', 'thermodynamics', 'quintessential', 'electromagnetism', 'sesquipedalian']
 }
 
 # none existance word on dict.youdao
+# "chargoggagoggmanchauggagoggchaubunagungamaugg"
 
 st.markdown("""
 <style>
@@ -389,30 +342,16 @@ elif params:
                             <div class="title-bee bbh-sans-bogle-regular">Bee</div>
                             <img class="title-image" src='data:image/png;base64,{get_base64("assets/games-title-art-img.jpg")}' alt="Bee image here">
                         </div>
-                        
+                        <div class="divider-container">
+                            <div class="divider"></div>
+                        </div>
                         <div class"text-container">
                             <div class="text-title momo-trust-display-regular">Apa itu Spelling Bee?</div>
                             <div class="text-content arima-isi">Spelling bee adalah sebuah kontes edukasi dan kompetitif di mana peserta diuji kemampuannya mengeja kata-kata (umumnya bahasa Inggris) secara lisan. Seorang pembaca akan memberikan kata, dan peserta harus menyebutkan urutan huruf-hurufnya dengan benar untuk maju ke babak berikutnya. Kompetisi ini bertujuan untuk meningkatkan penguasaan kosa kata, ejaan, dan pemahaman bahasa secara mendalam.</div>
                         </div>
-                        
-                        <div class="grand-divider-container">
-                            <div class="divider-container">
-                                <div class="divider"></div>
-                            </div>
-                        </div>
-                        
                         <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
                         
                         <style>
-                        .grand-divider-container {{
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding-top: 1em;
-                        padding-bottom: 0;
-                        }}
-                        
                         .rainbow-text {{
                         display: flex;
                         justify-content:center;
@@ -422,7 +361,7 @@ elif params:
                         background-color: white;
                         background-clip: text;
                         color: transparent;
-                        margin: 0;
+                        margin: 1.75em 0em 0em 0em;
                         animation: rainbow 5s linear infinite;
                         }}
                         
@@ -502,69 +441,6 @@ elif params:
                         text-align: center;
                         }}
                         
-                        .divider-container, .divider-container2 {{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-align: center;
-                        padding: 1px;
-                        z-index: 1;
-                        width: 100%;
-                        height: .5rem;
-                        position: relative;
-                        margin: 3em;
-                        margin-top: 1.25em;
-                        }}
-                        
-                        .divider-container::before, .divider-container::after, .divider-container2::before, .divider-container2::after {{
-                        transition: all 1s ease;
-                        }}
-                        .divider-container::before {{
-                        content: "";
-                        top: -197%;
-                        width: 40px;
-                        height: 40px;
-                        background-color: #232324;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out infinite;
-                        }}
-                        .divider-container2::before {{
-                        content: "";
-                        content: "";
-                        top: -197%;
-                        width: 40px;
-                        height: 40px;
-                        background-color: #232324;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out reverse infinite;
-                        }}
-                        .divider-container::after {{
-                        content: "";
-                        width: 20px;
-                        height: 20px;
-                        background-color: white;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: divider-spin 7s ease infinite;
-                        }}
-                        .divider-container2::after {{
-                        content: "";
-                        width: 20px;
-                        height: 20px;
-                        background-color: white;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: divider-spin 7s ease reverse infinite;
-                        }}
-                        .divider {{
-                        height: .35rem;
-                        width: 100%;
-                        background-image: linear-gradient(90deg, transparent, white,white, transparent);
-                        margin: 1.5em 0;
-                        }}
-                        
                         @keyframes bee {{
                             0% {{
                             transform: rotate(-7deg);
@@ -596,14 +472,18 @@ elif params:
                         }}
                         </style>
                         """)
-                st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
+                st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>skornya gak permanen btw</sup></h4>
                             <style>
                             .heading4 {{
                             text-align: center;
                             }}
                             
                             sup {{
-                            font-size: .55em;
+                            font-size: .5em;
+                            }}
+                            
+                            [data-testid="stMarkdownContainer"] a[href^="#"] {{
+                            display: none !important;
                             }}
                             </style>
                             """, unsafe_allow_html=True)
@@ -679,4 +559,6 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
+
 
