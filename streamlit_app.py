@@ -577,12 +577,12 @@ elif params:
                         @keyframes rainbow {{
                         0% {{background-color: white}}
                         12.5% {{background-color: red}}
-                        25% {{background-color: yellow}}
-                        37.5% {{background-color: green}}
-                        50% {{background-color: cyan}}
-                        62.5% {{background-color: blue}}
-                        75% {{background-color: pink}}
-                        87.5% {{background-color: purple}}
+                        25% {{background-color: orange}}
+                        37.5% {{background-color: yellow}}
+                        50% {{background-color: green}}
+                        62.5% {{background-color: cyan}}
+                        75% {{background-color: blue}}
+                        87.5% {{background-color: pink}}
                         100% {{background-color: white}}
                         }}
                         
@@ -680,4 +680,5 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
