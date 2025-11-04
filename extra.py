@@ -199,11 +199,11 @@ def extra_menu():
             font-size: 1em;
         }}
         
-        .linkbtn {{
-        background-color: #8e53d4;
+        .linkbtn {{ 
         margin: 1em 1em 1em 1em;
         border-radius: 99px;
-        border: 4px solid #592596;
+        background-color: #66a0bd;
+        border: 0.2rem solid #24ADF2;
         padding: 10px 0;
         position: relative;
         overflow: hidden;
@@ -212,7 +212,6 @@ def extra_menu():
         }}
         .linkbtn::before, .linkbtn::after {{
         content: "";
-        background-color: #8e53d4;
         position: absolute;
         width: 100%;
         height: 120%;
@@ -240,7 +239,7 @@ def extra_menu():
         background-color: #71D7CB;
         }}
         .linkbtn:has(a:hover) {{
-        border: 4px solid #2EA395;
+        border: 3px solid #2EA395;
         transition: all .5s ease;
         }}
         

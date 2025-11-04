@@ -109,7 +109,7 @@ def games_reset():
 ROUND = 15
 
 def games():
-    TIME_LIMIT = 10 if st.session_state.diff == "Easy bos" else 8 if st.session_state.diff == "okayy" else 7 if st.session_state.diff == "hard" else 15 if st.session_state.diff == "DESPAIR" else 0.11037
+    TIME_LIMIT = 10 if st.session_state.diff == "Easy" else 8 if st.session_state.diff == "Medium" else 7 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
 
     st.markdown(f"<h4>Round: {'{:02d}'.format(st.session_state.round)}/{ROUND}</h4>", unsafe_allow_html=True)
 
@@ -127,14 +127,14 @@ def games():
         if user_input:
             st.session_state.answer.append([user_input,1 if user_input.strip().lower() == st.session_state.word.lower() else 3, st.session_state.word])
             if user_input.strip().lower() == st.session_state.word.lower():
-                st.session_state.correct += 1 if st.session_state.diff == "Easy bos" else 2 if st.session_state.diff == "okayy" else 4 if st.session_state.diff == "hard" else 8 if st.session_state.diff == "DESPAIR" else 0
+                st.session_state.correct += 1 if st.session_state.diff == "Easy" else 2 if st.session_state.diff == "Medium" else 4 if st.session_state.diff == "Hard" else 8 if st.session_state.diff == "EXTREME" else 0
             break
 
         if elapsed > TIME_LIMIT:
             st.session_state.answer.append([user_input,2, st.session_state.word])
             break
 
-        timer_placeholder.markdown(f"⏳ *Time: {elapsed} seconds*")
+        timer_placeholder.markdown(f"⏳ Time: {elapsed} seconds")
         progress_placeholder.progress(elapsed / TIME_LIMIT)
         time.sleep(.5)
 
@@ -192,7 +192,7 @@ spelling_bee_words = {
     ],
 
     # 🔥 HARD — kata akademik, abstrak, atau jarang dipakai (±65 kata)
-    "hard": [
+    "Hard": [
         "phenomenon", "ambiguous", "onomatopoeia", "entrepreneur", "acquaintance", "benevolent",
         "miscellaneous", "superfluous", "conscientious", "magnificent", "nostalgia", "quarantine",
         "silhouette", "symphony", "vocabulary", "catastrophe", "hypothesis", "perception",
@@ -209,13 +209,13 @@ spelling_bee_words = {
     # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
     "extreme": [
         "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
-        "antidisestablishmentarianism", "sesquipedalian", "schadenfreude",
-        "juxtaposition", "synecdoche", "ubiquitous","pulchritudinous", 
-        "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution", "paradigm", 
-        "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
+        "antidisestablishmentarianism", "sesquipedalian", "xylophonist", "schadenfreude",
+        "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
+        "pulchritudinous", "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution",
+        "paradigm", "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
         "cacophony", "vicissitude", "lachrymose", "philanthropy", "soliloquy", "anachronism",
         "sagacious", "verisimilitude", "bildungsroman", "existentialism", "magnanimous",
-        "obstreperous", "susceptibility", "supererogatory", "recalcitrant",
+        "obstreperous", "susceptibility", "supererogatory", "recalcitrant", "parallelogrammatic",
         "psychology", "antagonist", "audiovisual", "circumference", "cryptography",
         "photosynthesis", "metallurgy", "thermodynamics", "epistemology", "telekinesis",
         "disenfranchisement", "incomprehensible", "institutionalization", "counterintuitive",
@@ -290,11 +290,13 @@ button {{
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
-    background-color: #2b74d4;
+    background-color: #66a0bd;
+    border: 0.2rem solid #24ADF2;
     transition: 0.3s;
 }}
 button:hover {{
     background-color: #1b4f91;
+    border: 3px solid #999999;
 }}
 """
 
@@ -306,11 +308,13 @@ button {{
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
-    background-color: #2b74d4;
+    background-color: #66a0bd;
+    border: 0.2rem solid #24ADF2;
     transition: 0.3s;
 }}
 button:hover {{
     background-color: #1b4f91;
+    border: 3px solid #999999;
 }}
 """
 
@@ -322,11 +326,13 @@ button {{
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
-    background-color: #2b74d4;
+    background-color: #66a0bd;
+    border: 0.2rem solid #24ADF2;
     transition: 0.3s;
 }}
 button:hover {{
     background-color: #1b4f91;
+    border: 3px solid #999999;
 }}
 """
 
@@ -384,8 +390,8 @@ css_style = """
                     color: white;
                     width: 200px;
                     height: 10px;
-                    background-color: green;
-                    border: 3px solid #4CAF50;
+                    background-color: #66a0bd;
+                    border: 0.2rem solid #24ADF2;
                     border-radius: 50px;
                     padding: 20px;
                     box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
@@ -407,6 +413,9 @@ elif params:
     if params.get("select") == "games":
         match st.session_state.menu_select:
             case 0:
+                judul = """Spelling bee adalah sebuah kontes edukasi dan kompetitif di mana peserta diuji kemampuannya mengeja kata-kata (umumnya bahasa Inggris) secara lisan. 
+                Seorang pembaca akan memberikan kata, dan peserta harus menyebutkan urutan huruf-hurufnya dengan benar untuk maju ke babak berikutnya. 
+                Kompetisi ini bertujuan untuk meningkatkan penguasaan kosa kata, ejaan, dan pemahaman bahasa secara mendalam. (Tapi dalam konteks di game ini katanya di ketik full)"""
                 st.html(f"""
                         <div class="title-container">
                             <div class="title-spelling bbh-sans-bogle-regular">Spelling</div>
@@ -416,7 +425,7 @@ elif params:
                         
                         <div class"text-container">
                             <div class="text-title momo-trust-display-regular">Apa itu Spelling Bee?</div>
-                            <div class="text-content arima-isi">Spelling bee adalah sebuah kontes edukasi dan kompetitif di mana peserta diuji kemampuannya mengeja kata-kata (umumnya bahasa Inggris) secara lisan. Seorang pembaca akan memberikan kata, dan peserta harus menyebutkan urutan huruf-hurufnya dengan benar untuk maju ke babak berikutnya. Kompetisi ini bertujuan untuk meningkatkan penguasaan kosa kata, ejaan, dan pemahaman bahasa secara mendalam.</div>
+                            <div class="text-content arima-isi">{judul}</div>
                         </div>
                         
                         <div class="grand-divider-container">
@@ -639,17 +648,34 @@ elif params:
                             st.session_state.menu_select = 1
                             st.rerun()
             case 1:
+                instruction = """
+📜 Aturan Permainan: <br>
+
+1. Ada suara menyebutkan kata dengan jelas. <br>
+2. Peserta harus menulis kata tersebut, misalnya: <br>
+   > “despair.” <br>
+3. Jika ejaan benar, peserta mendapat poin. Jika salah, tidak mendapat poin. <br>
+4. Ada batas waktu untuk mengejaan kata tersebut. <br>
+5. Ada total 15 ronde permainan.
+"""
+
+                note = """
+1. Anda bisa memilih kesusahan ejaan kata. <br>
+2. Untuk memasukan kata di kolom yang sudah di sediakan. <br>
+3. Jika kata sudah dimasukan, klik "Enter" atau klik halaman yang kosong. <br>
+4. Kata yang di ejaan itu dalam bahasa inggris. <br>
+"""
                 st.html(f"""
                         <div class="instruksi">
-                            <div class="instruksi-title bbh-sans-bogle-regular">INSTRUKSI</div>
+                            <div class="instruksi-title momo-trust-display-regular">📋INSTRUKSI📋</div>
                             <div class="instruksi-text-wrapper">    
-                                <div class="instruksi-text arima-isi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh non mauris pellentesque, nec convallis libero dapibus. Aliquam non scelerisque ante. Praesent tempor dolor quis magna convallis posuere. Etiam vitae dictum lectus. Mauris vitae ligula tincidunt, convallis nulla ac, scelerisque erat. Aliquam libero felis, scelerisque sed consequat eu, vehicula vel mauris. Quisque efficitur finibus dui, ac faucibus leo elementum eu. Nunc pharetra vitae elit ac laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet massa est. Nulla interdum, elit eget maximus facilisis, nulla nibh posuere dolor, non mattis odio purus ut libero. Donec semper nec quam at elementum. Cras faucibus luctus metus vitae pellentesque. </div>
+                                <div class="instruksi-text arima-isi">{instruction}</div>
                             </div>
                         </div>
                         <div class="catatan">
-                            <div class="catatan-title bbh-sans-bogle-regular">CATATAN</div>
+                            <div class="catatan-title momo-trust-display-regular">📓CATATAN📓</div>
                             <div class="catatan-text-wrapper">    
-                                <div class="catatan-text arima-isi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh non mauris pellentesque, nec convallis libero dapibus. Aliquam non scelerisque ante. Praesent tempor dolor quis magna convallis posuere. Etiam vitae dictum lectus. Mauris vitae ligula tincidunt, convallis nulla ac, scelerisque erat. Aliquam libero felis, scelerisque sed consequat eu, vehicula vel mauris. Quisque efficitur finibus dui, ac faucibus leo elementum eu. Nunc pharetra vitae elit ac laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet massa est. Nulla interdum, elit eget maximus facilisis, nulla nibh posuere dolor, non mattis odio purus ut libero. Donec semper nec quam at elementum. Cras faucibus luctus metus vitae pellentesque. </div>
+                                <div class="catatan-text arima-isi">{note}</div>
                             </div>
                         </div>
                         <style>
@@ -663,14 +689,14 @@ elif params:
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 3.35em;
+                        font-size: 3em;
                         background-color: orange;
                         max-width: 100%;
                         border-radius: .55em .55em 0em 0em;
                         border: .15em solid #ba7213;
                         z-index: 3;
                         color: black;
-                        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+                        background-image: linear-gradient(rgba(255,165,0,0.1),rgba(255,165,0,0.1)), url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
                         }}
                         .instruksi-title {{
                         background-position: left bottom;
@@ -689,9 +715,6 @@ elif params:
                         
                         .instruksi-text, .catatan-text {{
                         display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-align: center;
                         border: .5em solid #e38a14;
                         border-top: 0;
                         max-width: 90%;
@@ -722,15 +745,22 @@ elif params:
             case 2:
                 diff = st.selectbox(
                 "select difficulty:",
-                ["Easy bos", "okayy", "hard", "DESPAIR"])
-                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
+                ["Easy", "Medium", "Hard", "EXTREME"])
+                if diff == "Easy":
+                    st.html("""<div></div>""")
+                elif diff == "Medium":
+                    st.html("""<div></div>""")
+                elif diff == "Hard":
+                    st.html("""<div></div>""")
+                elif diff == "EXTREME":
+                    st.html("""<div></div>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Play"):
                             st.session_state.menu_select = 3
                             st.session_state.diff = diff
                             st.session_state.time = math.floor(time.time())
-                            st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
+                            st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                             st.rerun()
             case 3:
                 games()
@@ -740,7 +770,7 @@ elif params:
                     if st.button("Ready"):
                         st.session_state.menu_select = 3
                         st.session_state.round += 1
-                        st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
+                        st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                         st.session_state.time = math.floor(time.time())
                         st.rerun()
                 elif st.session_state.round == ROUND:
@@ -756,7 +786,3 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
-
-
-
-
