@@ -209,13 +209,13 @@ spelling_bee_words = {
     # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
     "extreme": [
         "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
-        "antidisestablishmentarianism", "sesquipedalian", "xylophonist", "schadenfreude",
-        "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
-        "pulchritudinous", "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution",
-        "paradigm", "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
+        "antidisestablishmentarianism", "sesquipedalian", "schadenfreude",
+        "juxtaposition", "synecdoche", "ubiquitous","pulchritudinous", 
+        "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution", "paradigm", 
+        "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
         "cacophony", "vicissitude", "lachrymose", "philanthropy", "soliloquy", "anachronism",
         "sagacious", "verisimilitude", "bildungsroman", "existentialism", "magnanimous",
-        "obstreperous", "susceptibility", "supererogatory", "recalcitrant", "parallelogrammatic",
+        "obstreperous", "susceptibility", "supererogatory", "recalcitrant",
         "psychology", "antagonist", "audiovisual", "circumference", "cryptography",
         "photosynthesis", "metallurgy", "thermodynamics", "epistemology", "telekinesis",
         "disenfranchisement", "incomprehensible", "institutionalization", "counterintuitive",
