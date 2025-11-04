@@ -12,7 +12,7 @@ import about_us
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
 #FRONTEND'S TO-DO
-# line 644
+# line ~643
 
 st.markdown("""
             <style>
@@ -376,6 +376,29 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
+css_style = """ 
+                    button {
+                    display: flex; 
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    width: 200px;
+                    height: 10px;
+                    background-color: green;
+                    border: 3px solid #4CAF50;
+                    border-radius: 50px;
+                    padding: 20px;
+                    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+                    transition: all .25s ease;
+                    font-weight: bold;
+                    }
+
+                    button:hover {
+                    border: 3px solid #999999;
+                    transition: all .25s ease;
+                    }
+                    """
+
 if params.get("select", "") == "":
     st.query_params.clear()
     st.query_params["select"] = "games"
@@ -609,30 +632,6 @@ elif params:
                             </style>
                             """, unsafe_allow_html=True)
                 # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
-
-                css_style = """ 
-                    button {
-                    display: flex; 
-                    justify-content: center;
-                    align-items: center;
-                    color: white;
-                    width: 200px;
-                    height: 10px;
-                    background-color: green;
-                    border: 3px solid #4CAF50;
-                    border-radius: 50px;
-                    padding: 20px;
-                    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-                    transition: all .25s ease;
-                    font-weight: bold;
-                    }
-                    
-                    button:hover {
-                    border: 3px solid #999999;
-                    transition: all .25s ease;
-                    }
-                    """
-
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",
                                             css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
@@ -640,22 +639,100 @@ elif params:
                             st.session_state.menu_select = 1
                             st.rerun()
             case 1:
-                st.markdown(f"""<h4>Rules:<br><br>1. yap<br>2. yap2</h4>""", unsafe_allow_html=True)
+                st.html(f"""
+                        <div class="instruksi">
+                            <div class="instruksi-title bbh-sans-bogle-regular">INSTRUKSI</div>
+                            <div class="instruksi-text-wrapper">    
+                                <div class="instruksi-text arima-isi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh non mauris pellentesque, nec convallis libero dapibus. Aliquam non scelerisque ante. Praesent tempor dolor quis magna convallis posuere. Etiam vitae dictum lectus. Mauris vitae ligula tincidunt, convallis nulla ac, scelerisque erat. Aliquam libero felis, scelerisque sed consequat eu, vehicula vel mauris. Quisque efficitur finibus dui, ac faucibus leo elementum eu. Nunc pharetra vitae elit ac laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet massa est. Nulla interdum, elit eget maximus facilisis, nulla nibh posuere dolor, non mattis odio purus ut libero. Donec semper nec quam at elementum. Cras faucibus luctus metus vitae pellentesque. </div>
+                            </div>
+                        </div>
+                        <div class="catatan">
+                            <div class="catatan-title bbh-sans-bogle-regular">CATATAN</div>
+                            <div class="catatan-text-wrapper">    
+                                <div class="catatan-text arima-isi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh non mauris pellentesque, nec convallis libero dapibus. Aliquam non scelerisque ante. Praesent tempor dolor quis magna convallis posuere. Etiam vitae dictum lectus. Mauris vitae ligula tincidunt, convallis nulla ac, scelerisque erat. Aliquam libero felis, scelerisque sed consequat eu, vehicula vel mauris. Quisque efficitur finibus dui, ac faucibus leo elementum eu. Nunc pharetra vitae elit ac laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet massa est. Nulla interdum, elit eget maximus facilisis, nulla nibh posuere dolor, non mattis odio purus ut libero. Donec semper nec quam at elementum. Cras faucibus luctus metus vitae pellentesque. </div>
+                            </div>
+                        </div>
+                        <style>
+                        .instruksi, .catatan {{
+                        max-width: 100%;
+                        height: auto;
+                        z-index: 0;
+                        }}
+                        
+                        .instruksi-title, .catatan-title {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 3.35em;
+                        background-color: orange;
+                        max-width: 100%;
+                        border-radius: .55em .55em 0em 0em;
+                        border: .15em solid #ba7213;
+                        z-index: 3;
+                        color: black;
+                        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+                        }}
+                        .instruksi-title {{
+                        background-position: left bottom;
+                        object-fit: cover;
+                        }}
+                        .catatan-title {{
+                        background-position: center top;
+                        object-fit: cover;
+                        }}
+                        
+                        .instruksi-text-wrapper, .catatan-text-wrapper {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        }}
+                        
+                        .instruksi-text, .catatan-text {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        border: .5em solid #e38a14;
+                        border-top: 0;
+                        max-width: 90%;
+                        z-index: 1;
+                        padding: 1em;
+                        margin-bottom: 2em;
+                        border-radius: 0 0 1.35em 1.35em ;
+                        background-color: #473602;
+                        }}
+                        .instruksi-text {{
+                        animation: color-pulse 2s ease infinite
+                        }}
+                        .catatan-text {{
+                        animation: color-pulse 2s ease reverse infinite
+                        }}
+                        
+                        @keyframes color-pulse {{
+                            50% {{
+                            background-color: #785a01;
+                            }}
+                        }}
+                        </style>""")
                 # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
-                if st.button("I understand"):
-                    st.session_state.menu_select = 2
-                    st.rerun()
+                with stylable_container(key="style", css_styles=css_style):
+                    with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                        if st.button("Saya sudah paham"):
+                            st.session_state.menu_select = 2
+                            st.rerun()
             case 2:
                 diff = st.selectbox(
                 "select difficulty:",
                 ["Easy bos", "okayy", "hard", "DESPAIR"])
                 # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
-                if st.button("Play"):
-                    st.session_state.menu_select = 3
-                    st.session_state.diff = diff
-                    st.session_state.time = math.floor(time.time())
-                    st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
-                    st.rerun()
+                with stylable_container(key="style", css_styles=css_style):
+                    with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                        if st.button("Play"):
+                            st.session_state.menu_select = 3
+                            st.session_state.diff = diff
+                            st.session_state.time = math.floor(time.time())
+                            st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy bos" else "medium" if st.session_state.diff == "okayy" else "hard" if st.session_state.diff == "hard" else "extreme" if st.session_state.diff == "DESPAIR" else ""))
+                            st.rerun()
             case 3:
                 games()
             case 4:
