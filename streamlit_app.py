@@ -209,7 +209,7 @@ spelling_bee_words = {
     # 👑 EXTREME — kata super panjang, akademik, atau tricky banget dieja (±55 kata)
     "extreme": [
         "pneumonoultramicroscopicsilicovolcanoconiosis", "floccinaucinihilipilification",
-        "antidisestablishmentarianism", "sesquipedalian", "xylophonist","chargoggagoggmanchauggagoggchaubunagungamaugg", "schadenfreude",
+        "antidisestablishmentarianism", "sesquipedalian", "xylophonist", "schadenfreude",
         "hippopotomonstrosesquipedaliophobia", "juxtaposition", "synecdoche", "ubiquitous",
         "pulchritudinous", "lugubrious", "perspicacious", "idiosyncrasy", "circumlocution",
         "paradigm", "euphemism", "quintessential", "metamorphosis", "pseudonym", "mnemonic",
@@ -756,6 +756,7 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
 
 
