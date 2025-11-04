@@ -582,7 +582,7 @@ elif params:
                         50% {{background-color: green}}
                         62.5% {{background-color: cyan}}
                         75% {{background-color: blue}}
-                        87.5% {{background-color: pink}}
+                        87.5% {{background-color: purple}}
                         100% {{background-color: white}}
                         }}
                         
@@ -680,5 +680,6 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
 
