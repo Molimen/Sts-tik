@@ -714,7 +714,6 @@ elif params:
                             }}
                         }}
                         </style>""")
-                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Saya sudah paham"):
