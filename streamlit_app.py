@@ -225,7 +225,6 @@ spelling_bee_words = {
 }
 
 # none existance word on dict.youdao
-#
 
 st.markdown("""
 <style>
