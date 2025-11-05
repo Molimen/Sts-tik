@@ -12,12 +12,10 @@ import about_us
 # BEFORE RELEASE, PLEASE FIX THE LANG!
 
 #FRONTEND'S TO-DO
-# line ~643
 
 st.markdown("""
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Acme&family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Momo+Trust+Display&display=swap');            
-            
+            @import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=BBH+Sans+Bogle&family=Momo+Trust+Display&family=Rowdies:wght@300;400;700&display=swap');            
             .momo-trust-display-regular {
             font-family: "Momo Trust Display", sans-serif;
             font-weight: 400;
@@ -35,14 +33,28 @@ st.markdown("""
             font-style: normal;
             line-height: 1.75em;
             }
-            .acme-regular {
-            font-family: "Acme", sans-serif;
+            .rowdies-light {
+            font-family: "Rowdies", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+            }
+            .rowdies-regular {
+            font-family: "Rowdies", sans-serif;
             font-weight: 400;
+            font-style: normal;
+            }
+            .rowdies-bold {
+            font-family: "Rowdies", sans-serif;
+            font-weight: 700;
             font-style: normal;
             }
             
             * {
             user-select: none;
+            }
+            
+            img {
+            image-rendering: crisp-edges;
             }
             
             [data-testid="stMarkdownContainer"] a[href^="#"] {
@@ -91,6 +103,14 @@ st.markdown("""
             </style>
             """, unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+div[data-testid="stStatusWidget"] div button {
+    display: none !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
@@ -106,7 +126,7 @@ def games_reset():
     st.session_state.answer = []
     st.session_state.correct = 0
 
-ROUND = 15
+ROUND = 10
 
 def games():
     TIME_LIMIT = 10 if st.session_state.diff == "Easy" else 8 if st.session_state.diff == "Medium" else 7 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
@@ -640,7 +660,7 @@ elif params:
                             }}
                             </style>
                             """, unsafe_allow_html=True)
-                # DONT USE st.columns TO CENTER THE BUTTON OR YOU WILL REGRET YOUR DECISION!
+
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",
                                             css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
@@ -736,6 +756,12 @@ elif params:
                             background-color: #785a01;
                             }}
                         }}
+                        
+                        @media (max-width: 700px) {{
+                            .instruksi-title, .catatan-title {{
+                            font-size: 2.15em;
+                            }}
+                        }}
                         </style>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
@@ -743,13 +769,283 @@ elif params:
                             st.session_state.menu_select = 2
                             st.rerun()
             case 2:
+                st.html(f"""
+                        <div class="diff-container">
+                            <div class='diff-title'></div>
+                            <div class='diff-title-text bbh-sans-bogle-regular'>Pilih level kesusahan</div>
+                        </div>    
+                        
+                        <style>
+                        .diff-container {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                        height: 8em;
+                        z-index: 0;
+                        margin-bottom: 1em;
+                        }}
+                        
+                        .diff-title {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 3em;
+                        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+                        background-position: left bottom;
+                        object-fit: contain;
+                        border-radius: 0em;
+                        text-align: center;
+                        line-height: 1.15em;
+                        height: 100%;
+                        width: 95%;
+                        border-radius: 4rem;
+                        position: relative;
+                        border: .4rem solid #c97704;
+                        overflow: hidden;
+                        animation: border-curve 2s ease infinite;
+                        }}
+                        .diff-title::before, .diff-title::after {{
+                        content: '';
+                        width: 5em;
+                        height: 3em;
+                        z-index: 1;
+                        position: absolute;
+                        background-color: orange;
+                        opacity: .8;
+                        filter: blur(.65em);
+                        transition: all 500ms ease;
+                        
+                        }}
+                        .diff-title::before {{
+                        transform: translate(7em);
+                        animation: slide1 1.75s ease-in-out infinite
+                        }}
+                        .diff-title::after {{
+                        transform: translate(-7em);
+                        animation: slide2 1.75s ease-in-out infinite
+                        }}
+                        
+                        .diff-title-text {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 3.45em;
+                        border-radius: .55em;
+                        text-align: center;
+                        line-height: 1.15em;
+                        padding: .45rem 0;
+                        width: 77%;
+                        height: 60%;
+                        position: absolute;
+                        color: #5c4d02;
+                        z-index: 2;
+                        }}
+                        @keyframes border-curve {{
+                            50% {{border-radius: 0;}}
+                        }}
+                        @keyframes slide1 {{
+                            from {{
+                            transform: translate(110%);
+                            }}
+                            to {{
+                            transform: translate(-110%);
+                            }}
+                        }}
+                        @keyframes slide2 {{
+                            from {{
+                            transform: translate(-110%);
+                            }}
+                            to {{
+                            transform: translate(110%);
+                            }}
+                        }}
+                        
+                        @media (max-width: 650px) {{
+                            .diff-title-text {{
+                            font-size: 2.85em;
+                            }}
+                        }}
+                        </style>
+                        """)
                 diff = st.selectbox(
-                "select difficulty:",
+                "Pilih Difficulty (level kesusahan gamenya)",
                 ["Easy", "Medium", "Hard", "EXTREME"])
+                st.html("""
+                        <div class="diff-label momo-trust-display-regular">Difficulty yang dipilih:</div>
+                        <style>
+                        .diff-label {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.55em;
+                        margin: 1em 0 0 0;
+                        }
+                        </style>
+                        """)
                 if diff == "Easy":
-                    st.html("""<div></div>""")
+                    st.html("""
+                            <div class="grand-easy-container">
+                                <div class="easy-container">
+                                    <div class='easy-decorator1'></div>
+                                    <div class='e rowdies-bold'>E</div>
+                                    <div class='a rowdies-bold'>a</div>
+                                    <div class='s rowdies-bold'>s</div>
+                                    <div class='y rowdies-bold'>y</div>
+                                    <div class='easy-decorator2'></div>
+                                </div>
+                            </div>
+                            
+                            <style>
+                            .easy-decorator1, .easy-decorator2 {
+                            width: 2rem;
+                            height: 2rem;
+                            margin: 1.1em;
+                            border-radius: 99em;
+                            border: 2px solid #11360c;
+                            }
+                            .easy-decorator1 {
+                            background-image: linear-gradient(90deg,#195d0a,#88ec72);
+                            }
+                            .easy-decorator2 {
+                            background-image: linear-gradient(-90deg, #195d0a,#88ec72);
+                            }
+                            
+                            .grand-easy-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: visible;
+                            margin: 0 0 1.5em 0;
+                            }
+                            
+                            .easy-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #35ca00;
+                            height: 4em;
+                            width: 15em;
+                            border-radius: 4em;
+                            border: 5px solid green;
+                            box-shadow: 4px 4px 4px 4px #404040;
+                            }
+                            
+                            .e, .a, .s, .y {
+                            margin: .2rem;
+                            font-size: 2em;
+                            color: black;
+                            }
+                            .e {animation: letter-pulse 1.5s ease infinite;margin-left: 0;}
+                            .a {animation: letter-pulse 1.5s ease infinite .2s}
+                            .s {animation: letter-pulse 1.5s ease infinite .4s}
+                            .y {animation: letter-pulse 1.5s ease infinite .6s;margin-right: 0;}
+                            
+                            @keyframes letter-pulse {
+                            50% {transform: scale(1.3);}
+                            }
+                            </style>
+                            """)
                 elif diff == "Medium":
-                    st.html("""<div></div>""")
+                    st.html("""
+                            <div class='great-grand-medium-container'>
+                                <div class="grand-medium-container">
+                                    <div class="medium-decorator1"></div>
+                                    <div class="medium-decorator2"></div>
+                                    <div class="medium-container">
+                                        <div class='medium rowdies-bold'>Medium</div> 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <style>
+                            .great-grand-medium-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;}
+                            
+                            .grand-medium-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: visible;
+                            margin: 0 0 1.5em 0;
+                            z-index: 0;
+                            position: relative;
+                            max-width: 100%;
+                            }
+                            
+                            .medium-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #ffd601;
+                            height: 4em;
+                            width: 15em;
+                            border-radius: 2em 0 2em 0;
+                            border: 5px solid #ba9c00;
+                            box-shadow: 4px 4px 4px 4px #404040;
+                            z-index: 1;
+                            overflow: hidden;
+                            position: relative;
+                            }
+                            
+                            .medium {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 2em;
+                            color: #d6a12d;
+                            mix-blend-mode: difference;
+                            z-index: 3;
+                            height: 4em;
+                            width: 5em;
+                            position: relative;
+                            overflow: hidden;
+                            }
+                            .medium::before {
+                            content: "";
+                            height: 32%;
+                            width: 9rem;
+                            background-color: yellow;
+                            position: absolute;
+                            z-index: 0;
+                            mix-blend-mode: difference;
+                            left: 0;
+                            transform: translate(-95%);
+                            animation: blendmode-slide 4s ease-in-out infinite;
+                            }
+                            
+                            .medium-decorator1 {
+                            width: 2.25em;
+                            height: 2.25em;
+                            background-color: #d67f2d;
+                            position: absolute;
+                            box-shadow: inset -2px 2px 2px 2px #87490f;
+                            border: 2px solid black;
+                            top: -15%;
+                            left: 90%;
+                            z-index: 9;
+                            }
+                            .medium-decorator2 {
+                            content: "";
+                            width: 2.25em;
+                            height: 2.25em;
+                            background-color: #d67f2d;
+                            position: absolute;
+                            box-shadow: inset 2px -2px 2px 2px #87490f;
+                            border: 2px solid black;
+                            bottom: -15%;
+                            right: 90%;
+                            z-index: 9;
+                            }
+                            
+                            @keyframes blendmode-slide {
+                                50% {transform: translate(105%);}
+                            }
+                            
+                            </style>
+                            """)
                 elif diff == "Hard":
                     st.html("""<div></div>""")
                 elif diff == "EXTREME":
