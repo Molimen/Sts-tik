@@ -203,7 +203,7 @@ def extra_menu():
         margin: 1em 1em 1em 1em;
         border-radius: 99px;
         background-color: #66a0bd;
-        border: 0.2rem solid #24ADF2;
+        border: 4px solid #24ADF2;
         padding: 10px 0;
         position: relative;
         overflow: hidden;
@@ -231,15 +231,15 @@ def extra_menu():
         .linkbtn:has(a:hover)::before {{
         transform: translateX(-70%) skewX(-45deg);
         transition: all .5s ease .05s;
-        background-color: #71D7CB;
+        background-color: #43de7b;
         }}
         .linkbtn:has(a:hover)::after {{
         transform: translateX(70%) skewX(45deg);
         transition: all .5s ease .05s;
-        background-color: #71D7CB;
+        background-color: #43de7b;
         }}
         .linkbtn:has(a:hover) {{
-        border: 3px solid #2EA395;
+        border: 4px solid #23a151;
         transition: all .5s ease;
         }}
         
@@ -425,6 +425,7 @@ def extra_menu():
                 100% {{ transform: scale(1); }}
                 }}
         </style>
+        
         <div class="container-h1 bbh-sans-bogle-regular">
             <h1>EKSTRA</h1>
         </div>
