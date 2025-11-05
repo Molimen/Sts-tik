@@ -53,10 +53,6 @@ st.markdown("""
             user-select: none;
             }
             
-            img {
-            image-rendering: crisp-edges;
-            }
-            
             [data-testid="stMarkdownContainer"] a[href^="#"] {
             display: none !important;
             }
@@ -1082,3 +1078,4 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
