@@ -912,7 +912,7 @@ elif params:
                   border-radius: 10px;
                   width: relative;
                   text-align: center;
-                  border: 5px solid {"#11360c" if st.session_state.diff == "Easy" else "#ba9c00" if st.session_state.diff == "Medium" else "#ba0000" if st.session_state.diff == "Hard" else "#9673ff" if st.session_state.diff == "EXTREME" else ""};
+                  border: 5px solid {"green" if st.session_state.diff == "Easy" else "#ba9c00" if st.session_state.diff == "Medium" else "#ba0000" if st.session_state.diff == "Hard" else "#9673ff" if st.session_state.diff == "EXTREME" else ""};
                 }}
                             
                 .st-emotion-cache-lyi571 {{
@@ -1440,5 +1440,6 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
 
