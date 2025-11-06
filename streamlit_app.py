@@ -809,6 +809,12 @@ elif params:
                         background-color: #785a01;
                         text-align: center;
                         }}
+
+                        @media (max-width: 700px) {{
+                            .instruksi-title, .catatan-title {{
+                            font-size: 2.15em;
+                            }}
+                        }}
                         </style>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
@@ -893,7 +899,7 @@ elif params:
                         
                         @media (max-width: 650px) {{
                             .diff-title-text {{
-                            font-size: 2.45em;
+                            font-size: 2.85em;
                             }}
                         }}
                         </style>
@@ -1434,4 +1440,5 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
 
