@@ -2,16 +2,12 @@ import streamlit as st
 import time
 import random
 import base64
+from streamlit import session_state
 from streamlit_extras.stylable_container import stylable_container
 import extra
 import time
 import math
 import about_us
-# TO-DO
-# add a few round!
-# BEFORE RELEASE, PLEASE FIX THE LANG!
-
-#FRONTEND'S TO-DO
 
 st.markdown("""
             <style>
@@ -122,18 +118,84 @@ def games_reset():
     st.session_state.answer = []
     st.session_state.correct = 0
 
-ROUND = 10
+ROUND = 15
 
 def games():
-    TIME_LIMIT = 10 if st.session_state.diff == "Easy" else 8 if st.session_state.diff == "Medium" else 7 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
+    TIME_LIMIT = 10 if st.session_state.diff == "Easy" else 9 if st.session_state.diff == "Medium" else 8 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
 
-    st.markdown(f"<h4>Round: {'{:02d}'.format(st.session_state.round)}/{ROUND}</h4>", unsafe_allow_html=True)
+    st.markdown(f"""<div class="round-count rowdies-regular">Round: {'{:02d}'.format(st.session_state.round)}/{ROUND:02d}</div>
+                <style>
+                .round-count {{
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                font-size: 2.75em;
+                background-image: linear-gradient(#4aa4f7, #183754);
+                border-radius: .25em;
+                margin-bottom: 1.5rem;
+                position: relative;
+                z-index: 1;
+                border: .15em solid #262a75;
+                overflow: hidden;
+                color: black;
+                transition: all .975s ease;
+                }}
+                
+                .round-count::before, .round-count::after {{
+                content: "";
+                display: flex;
+                flex-direction: row;
+                width: 40%;
+                height: 100%;
+                background-color: #1351bd;
+                position: absolute;
+                opacity: .820;
+                padding: .25em;
+                z-index: 0;
+                filter: drop-shadow(5px 5px 10px black) drop-shadow(-5px 5px 10px black);
+                transition: all .975s ease;
+                }}
+                .round-count::before{{
+                left: -20%;
+                animation: skewy1 4s ease infinite;
+                }}
+                
+                .round-count::after {{
+                right: -20%;
+                animation: skewy2 4s ease infinite;
+                }}
+                
+                @keyframes skewy1 {{
+                    25% {{transform: skewX(-60deg);}}
+                    50% {{transform: skewX(0deg);}}
+                    75% {{transform: skewx(60deg);}}
+                }}
+                @keyframes skewy2 {{
+                    25% {{transform: skewX(60deg);}}
+                    50% {{transform: skewX(0deg);}}
+                    75% {{transform: skewx(-60deg);}}
+                }}
+                
+                @media (max-width: 600px) {{
+                    .round-count{{
+                    font-size: 2em;
+                    }}
+                    
+                    .round-count::before {{
+                    left: -32%;
+                    }}
+                    .round-count::after {{
+                    right: -32%;
+                    }}
+                }}
+                </style>
+                """, unsafe_allow_html=True)
 
     timer_placeholder = st.empty()
     progress_placeholder = st.empty()
 
     st.audio(f"https://dict.youdao.com/dictvoice?audio={st.session_state.word}&type=2")
-    st.write(st.session_state.word)
 
     user_input = st.text_input("Type the word here:")
 
@@ -150,7 +212,16 @@ def games():
             st.session_state.answer.append([user_input,2, st.session_state.word])
             break
 
-        timer_placeholder.markdown(f"⏳ Time: {elapsed} seconds")
+        timer_placeholder.markdown(f"""<div class="livetimer momo-trust-display-regular">⏳ Time: {elapsed} / {TIME_LIMIT} seconds</div>
+                                    <style>
+                                    .livetimer {{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    font-size: 1.12em;
+                                    }}
+                                    </style>
+                                    """, unsafe_allow_html=True)
         progress_placeholder.progress(elapsed / TIME_LIMIT)
         time.sleep(.5)
 
@@ -361,8 +432,8 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
-                <span style='text-align: center;font-size:0.8rem;'>Games</span>
+        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Permainan</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -376,8 +447,8 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
-                <span style='text-align: center;font-size:0.8rem;'>Extras</span>
+        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Ekstra</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -391,8 +462,8 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:10px;'>
-                <span style='text-align: center;font-size:0.8rem;'>About Us</span>
+        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Tentang kami</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -660,26 +731,28 @@ elif params:
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",
                                             css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
-                        if st.button("Mulai Permainan"):
+                        if st.button("Mainin minigamenya!"):
                             st.session_state.menu_select = 1
                             st.rerun()
             case 1:
                 instruction = """
 📜 Aturan Permainan: <br>
 
-1. Ada suara menyebutkan kata dengan jelas. <br>
+1. Ada suara menyebutkan kata dengan jelas. <br> ------------------------- <br>
 2. Peserta harus menulis kata tersebut, misalnya: <br>
-   > “despair.” <br>
-3. Jika ejaan benar, peserta mendapat poin. Jika salah, tidak mendapat poin. <br>
+   > “despair” <br>
+   (huruf besar atau kecil itu bebas, tapi jangan ada karakter lain selain huruf) <br> ------------------------- <br>
+3. Jika ejaan benar, peserta mendapat poin. Jika salah, tidak mendapat poin. <br> ------------------------- <br>
 4. Ada batas waktu untuk mengejaan kata tersebut. <br>
+    Easy = 10 detik<br>Medium = 9 detik<br>Hard = 8 detik<br>Extreme = 15 detik<br> ------------------------- <br>
 5. Ada total 15 ronde permainan.
 """
 
                 note = """
-1. Anda bisa memilih kesusahan ejaan kata. <br>
-2. Untuk memasukan kata di kolom yang sudah di sediakan. <br>
-3. Jika kata sudah dimasukan, klik "Enter" atau klik halaman yang kosong. <br>
-4. Kata yang di ejaan itu dalam bahasa inggris. <br>
+1. Anda bisa memilih kesusahan ejaan kata. <br> ------------------------- <br>
+2. Untuk menjawab, masukan kata dalam kolom yang sudah di sediakan. <br> -------------------------<br>
+3. Jika kata sudah dimasukan, klik "Enter" atau klik bagian halaman yang kosong. <br> -------------------------<br>
+4. Kata yang di eja (diketik si kalo di sini) itu dalam bahasa inggris. <br>
 """
                 st.html(f"""
                         <div class="instruksi">
@@ -739,6 +812,7 @@ elif params:
                         margin-bottom: 2em;
                         border-radius: 0 0 1.35em 1.35em ;
                         background-color: #473602;
+                        text-align: center;
                         }}
                         .instruksi-text {{
                         animation: color-pulse 2s ease infinite
@@ -795,9 +869,11 @@ elif params:
                         line-height: 1.15em;
                         height: 100%;
                         width: 95%;
-                        border-radius: 4rem;
+                        border-radius: 0rem;
                         position: relative;
-                        border: .4rem solid #c97704;
+                        border: .65rem solid #c97704;
+                        border-top: .65rem solid #875100;
+                        border-bottom: .65rem solid #875100;
                         overflow: hidden;
                         animation: border-curve 2s ease infinite;
                         }}
@@ -837,25 +913,6 @@ elif params:
                         color: #5c4d02;
                         z-index: 2;
                         }}
-                        @keyframes border-curve {{
-                            50% {{border-radius: 0;}}
-                        }}
-                        @keyframes slide1 {{
-                            from {{
-                            transform: translate(110%);
-                            }}
-                            to {{
-                            transform: translate(-110%);
-                            }}
-                        }}
-                        @keyframes slide2 {{
-                            from {{
-                            transform: translate(-110%);
-                            }}
-                            to {{
-                            transform: translate(110%);
-                            }}
-                        }}
                         
                         @media (max-width: 650px) {{
                             .diff-title-text {{
@@ -864,6 +921,26 @@ elif params:
                         }}
                         </style>
                         """)
+
+                st.markdown("""<style>
+                [data-testid="stSelectbox"] {
+                  background-color: #9c3205;
+                  padding: 20px;
+                  border-radius: 10px;
+                  width: relative;
+                  text-align: center;
+                  border: 5px solid #8f5840;
+                  color: black;
+                }
+                [data-testid="stSelectbox"]::before {
+                content: '';
+                width: 110%; 
+                height: 110%;
+                background-color: red;
+                }
+                
+                </style>""", unsafe_allow_html=True)
+
                 diff = st.selectbox(
                 "Pilih Difficulty (level kesusahan gamenya)",
                 ["Easy", "Medium", "Hard", "EXTREME"])
@@ -1043,9 +1120,185 @@ elif params:
                             </style>
                             """)
                 elif diff == "Hard":
-                    st.html("""<div></div>""")
+                    st.html("""<div class="grand-hard-container">
+                                <div class='hard-decorator1'></div>
+                                <div class='hard-decorator2'></div>
+                                <div class="hard-container">
+                                    <div class='hard rowdies-bold'>Hard</div>
+                                </div>
+                            </div>
+                            
+                            <style>
+                            .hard-decorator1, .hard-decorator2 {
+                            width: 2.3rem;
+                            height: 2.3rem;
+                            margin: 1.1em;
+                            border-radius: 99em;
+                            position: absolute;
+                            z-index: 5;
+                            background-color: black;
+                            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+                            animation: hard-star-pulse 1.5s ease-in-out infinite;
+                            }
+                            .hard-decorator1 {
+                            transform: translate(-293%);
+                            }
+                            .hard-decorator2 {
+                            transform: translate(293%);
+                            }
+                            
+                            
+                            .grand-hard-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: visible;
+                            margin: 0 0 1.5em 0;
+                            }
+                            
+                            .hard-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #ff3c19;
+                            height: 4em;
+                            width: 15em;
+                            border-radius: 0em;
+                            border: .4rem solid #ba0000;
+                            box-shadow: 4px 4px 4px 4px #404040;
+                            position: relative;
+                            animation: hard-color-pulse 2s ease infinite;
+                            }
+                            
+                            .hard {
+                            font-size: 2em;
+                            color: black
+                            }
+                            
+                            .hard-container::before {
+                            content: "";
+                            width: 25%;
+                            height: 170%;
+                            left: -10%;
+                            background-color: #6c0202;
+                            position: absolute;
+                            border-radius: .35em;
+                            border: 3px solid black;
+                            box-shadow: inset 2px 2px 3px 3px darkred;
+                            }
+                            .hard-container::after {
+                            content: "";
+                            width: 25%;
+                            height: 170%;
+                            right: -10%;
+                            background-color: #6c0202;
+                            position: absolute;
+                            border-radius: .35em;
+                            border: 3px solid black;
+                            box-shadow: inset -2px 2px 3px 3px darkred;
+                            }
+                            
+                            @keyframes hard-color-pulse {
+                                50% {background-color: #6e0404;}
+                            }
+                            @keyframes hard-star-pulse {
+                                50% {background-color: #d90404;}
+                            }
+                            </style>
+                            """)
                 elif diff == "EXTREME":
-                    st.html("""<div></div>""")
+                    st.html("""
+                            <div class="great-grand-extreme-container">
+                                <div class="grand-extreme-container">
+                                    <div class="extreme-container">
+                                        <div class='extreme-decorator2'></div>
+                                        <div class='extreme-decorator1'></div>
+                                    </div>
+                                    <div class='extreme rowdies-bold'>EXTREME</div>
+                                </div>
+                            </div>
+                            
+                            <style>
+                            .great-grand-extreme-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: hidden;
+                            }
+                            
+                            .extreme-decorator1, .extreme-decorator2 {
+                            width: 60px;
+                            height: 40px;
+                            background-color: #7315bf;
+                            position: absolute;
+                            border-radius: .35em 0 0 .35em;
+                            z-index: 0;
+                            animation: spike 1.15s ease infinite;
+                            clip-path: polygon(100% 0, 75% 50%, 100% 100%);
+                            }
+                            .extreme-decorator1 {
+                            transform: translate(-250%);
+                            }
+                            .extreme-decorator2 {
+                            transform:translate(250%) rotateZ(180deg)
+                            }
+
+                            .grand-extreme-container {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            overflow: hidden;
+                            padding: 1.25em;
+                            position: relative;
+                            height: auto;
+                            width: 55%;
+                            border: 2px solid transparent;
+                            animation: extreme-card .5s ease infinite;
+                            }
+                            
+                            .extreme-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: #9002d4;
+                            height: 4em;
+                            width: 15em;
+                            border-radius: 0em;
+                            border: .4rem solid #9673ff;
+                            position: relative;
+                            mix-blend-mode: difference;
+                            animation: extreme-color-pulse 1.45s ease-in-out infinite;
+                            z-index: 0;
+                            box-shadow: 0px 0px 12px 12px rgba(255,0,0,.5);
+                            }
+                            
+                            .extreme {
+                            font-size: 2em;
+                            color: #b726fc;
+                            mix-blend-mode: difference;
+                            position: absolute;
+                            z-index: 0;                     
+                            }
+                            
+                            @keyframes extreme-color-pulse {
+                                50% {background-color: #45155c;}
+                            }
+                            @keyframes spike {
+                                33% {clip-path: polygon(100% 0, 75% 50%, 100% 100%);}
+                                66% {clip-path: polygon(100% 0, 25% 50%, 100% 100%);}
+                            }
+                            @keyframes extreme-card {
+                                33% {transform: rotateZ(3deg);}
+                                58% {transform: rotateZ(-5deg);}
+                                78% {transform: rotateZ(2deg);}
+                            }
+                            
+                            @media (max-width: 600px) {
+                                .grand-extreme-container {
+                                width: 100%;
+                                }
+                            }
+                            </style>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Play"):
@@ -1058,24 +1311,148 @@ elif params:
                 games()
             case 4:
                 if st.session_state.round != ROUND:
-                    st.markdown(f"<h4>Round: {'{:02d}'.format(st.session_state.round+1)}/{ROUND}</h4>", unsafe_allow_html=True)
-                    if st.button("Ready"):
-                        st.session_state.menu_select = 3
-                        st.session_state.round += 1
-                        st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
-                        st.session_state.time = math.floor(time.time())
-                        st.rerun()
+                    st.markdown(f"""
+                                <div class="round-count rowdies-regular">Round: {'{:02d}'.format(st.session_state.round+1)}/{ROUND:02d}</div>
+                                
+                                <style>
+                                .round-count {{
+                                display: flex;
+                                text-align: center;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 2.75em;
+                                background-image: linear-gradient(#fcf047, #cf7e04);
+                                border-radius: .25em;
+                                margin-bottom: 1.5rem;
+                                position: relative;
+                                z-index: 1;
+                                border: .15em solid #9e3200;
+                                overflow: hidden;
+                                color: black;
+                                transition: all .975s ease;
+                                }}
+                                
+                                .round-count::before, .round-count::after {{
+                                content: "";
+                                display: flex;
+                                flex-direction: row;
+                                width: 40%;
+                                height: 100%;
+                                background-color: #c95f2e;
+                                position: absolute;
+                                opacity: .820;
+                                padding: .25em;
+                                z-index: 0;
+                                filter: drop-shadow(5px 5px 10px black) drop-shadow(-5px 5px 10px black);
+                                transition: all .975s ease;
+                                }}
+                                .round-count::before{{
+                                left: -20%;
+                                animation: skewy1 4s ease infinite;
+                                }}
+                                
+                                .round-count::after {{
+                                right: -20%;
+                                animation: skewy2 4s ease infinite;
+                                }}
+                                
+                                @keyframes skewy1 {{
+                                    25% {{transform: skewX(-60deg);}}
+                                    50% {{transform: skewX(0deg);}}
+                                    75% {{transform: skewx(60deg);}}
+                                }}
+                                @keyframes skewy2 {{
+                                    25% {{transform: skewX(60deg);}}
+                                    50% {{transform: skewX(0deg);}}
+                                    75% {{transform: skewx(-60deg);}}
+                                }}
+                                
+                                @media (max-width: 600px) {{
+                                    .round-count{{
+                                    font-size: 2em;
+                                    }}
+                                    
+                                    .round-count::before {{
+                                    left: -32%;
+                                    }}
+                                    .round-count::after {{
+                                    right: -32%;
+                                    }}
+                                }}
+                                </style>
+                                """, unsafe_allow_html=True)
+                    with stylable_container(key="style", css_styles=css_style):
+                        with stylable_container(key="center1",
+                                                css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                            if st.button("Ready"):
+                                st.session_state.menu_select = 3
+                                st.session_state.round += 1
+                                st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
+                                st.session_state.time = math.floor(time.time())
+                                st.rerun()
                 elif st.session_state.round == ROUND:
-                    for i in range(len(st.session_state.answer)):
-                        st.markdown(f"""<div style="background-color:{"#173828" if st.session_state.answer[i][1] == 1 else "#3e2328"};border-radius:8px;padding:10px;line-height:1.5;">
-                            {"Round:"} {'{:02d}'.format(i+1)}/{ROUND}<br>{"Time out" if st.session_state.answer[i][0] == "" else st.session_state.answer[i][0]}<br>{"Correct answer:"} {st.session_state.answer[i][2]}</div><br>""", unsafe_allow_html=True)
+                    if st.session_state.diff == "Easy":
+                        colors = ['rgba(53, 202, 0, .35)', 'rgba(0, 128, 0, 1)']
+                    elif st.session_state.diff == "Medium":
+                        colors = ['rgba(255, 214, 1, .35)', 'rgba(186, 156, 0, 1)']
+                    elif st.session_state.diff == "Hard":
+                        colors = ['rgba(255, 60, 25, .35)', 'rgba(186, 0, 0, 1)']
+                    elif st.session_state.diff == "EXTREME":
+                        colors = ['rgba(133, 17, 188, .35)', 'rgba(83, 2, 116, 1)']
 
-                    if st.button("Back"):
-                        games_reset()
-                        st.rerun()
+                    st.html(f"""
+                            <div class="result-title bbh-sans-bogle-regular">Hasil Performa Permainan</div>
+                            
+                            <style>
+                            .result-title {{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 2.85em;
+                            background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+                            background-position: left center;
+                            border: .15em solid #ba7213;
+                            border-radius: 7em 7em 2em 2em;
+                            color: black;
+                            padding: .35em;
+                            text-align: center;
+                            line-height: 2.5rem;
+                            }}
+                            @media (max-width: 700px) {{
+                                .result-title {{
+                                font-size: 2.25em;
+                                padding: .1em;
+                                }}
+                            }}
+                            </style>
+                            """)
+                    for i in range(len(st.session_state.answer)):
+                        st.markdown(f"""<div class="arima-isi" style="background-color:{"#173828" if st.session_state.answer[i][1] == 1 else "#3e2328"};border-radius:10px;padding:10px;line-height:1.5;border: 3px solid {"#71d46e" if st.session_state.answer[i][1] == 1 else "#d46e6e"}">
+                            {"Ronde:"} {'{:02d}'.format(i+1)}/{ROUND:02d}<br>{"-- Waktu Habis --" if st.session_state.answer[i][0] == "" else st.session_state.answer[i][0]}<br>{"Correct answer:"} {st.session_state.answer[i][2]}</div><br>""", unsafe_allow_html=True)
+                    st.html(f"""
+                            <div class="skor momo-trust-display-regular">💯 Skor Akhir 💯<br>+ {st.session_state.correct / ROUND:.2f}</div>
+                            <style>
+                            .skor {{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 1.5em;
+                            text-align: center;
+                            background-color: #0d0173;
+                            border: 3px solid #4032bf;
+                            border-radius: 2em 2em 8em 8em;
+                            margin-bottom: 1rem;
+                            }}
+                            </style>
+                            """)
+                    with stylable_container(key="style", css_styles=css_style):
+                        with stylable_container(key="center1",
+                                                css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                            if st.button("Back"):
+                                games_reset()
+                                st.rerun()
 
     elif params.get("select") == "extras":
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
-
