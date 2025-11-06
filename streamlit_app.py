@@ -95,14 +95,6 @@ st.markdown("""
             </style>
             """, unsafe_allow_html=True)
 
-st.markdown("""
-<style>
-div[data-testid="stStatusWidget"] div button {
-    display: none !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
 def get_base64(file_path):
     with open(file_path, "rb") as f:
         return base64.b64encode(f.read()).decode()
@@ -192,6 +184,7 @@ def games():
                 </style>
                 """, unsafe_allow_html=True)
 
+    st.markdown("""""", unsafe_allow_html=True) # don't delete this. cause this fix the gray out button!
     timer_placeholder = st.empty()
     progress_placeholder = st.empty()
 
