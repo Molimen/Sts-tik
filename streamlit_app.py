@@ -806,26 +806,8 @@ elif params:
                         padding: 1em;
                         margin-bottom: 2em;
                         border-radius: 0 0 1.35em 1.35em ;
-                        background-color: #473602;
+                        background-color: #785a01;
                         text-align: center;
-                        }}
-                        .instruksi-text {{
-                        animation: color-pulse 2s ease infinite
-                        }}
-                        .catatan-text {{
-                        animation: color-pulse 2s ease reverse infinite
-                        }}
-                        
-                        @keyframes color-pulse {{
-                            50% {{
-                            background-color: #785a01;
-                            }}
-                        }}
-                        
-                        @media (max-width: 700px) {{
-                            .instruksi-title, .catatan-title {{
-                            font-size: 2.15em;
-                            }}
                         }}
                         </style>""")
                 with stylable_container(key="style", css_styles=css_style):
