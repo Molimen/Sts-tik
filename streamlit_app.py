@@ -104,7 +104,7 @@ def games_reset():
         st.session_state.score += st.session_state.correct / ROUND
 
     st.session_state.menu_select = 0
-    st.session_state.diff = ""
+    st.session_state.diff = "Easy"
     st.session_state.round = 1
     st.session_state.time = 0
     st.session_state.answer = []
@@ -229,7 +229,9 @@ if "menu_select" not in st.session_state:
 if "score" not in st.session_state:
     st.session_state.score = 0
 if "diff" not in st.session_state:
-    st.session_state.diff = ""
+    st.session_state.diff = "Easy"
+if "diff_chk" not in st.session_state:
+    st.session_state.diff_chk = ""
 if "round" not in st.session_state:
     st.session_state.round = 1
 if "time" not in st.session_state:
@@ -915,26 +917,22 @@ elif params:
                         </style>
                         """)
 
-                st.markdown("""<style>
-                [data-testid="stSelectbox"] {
-                  background-color: #9c3205;
+                st.markdown(f"""<style>
+                [data-testid="stSelectbox"] {{
+                  background-color: {"#35ca00" if st.session_state.diff == "Easy" else "#ffd601" if st.session_state.diff == "Medium" else "#ff3c19" if st.session_state.diff == "Hard" else "#7315bf" if st.session_state.diff == "EXTREME" else ""};
                   padding: 20px;
                   border-radius: 10px;
                   width: relative;
                   text-align: center;
-                  border: 5px solid #8f5840;
-                  color: black;
-                }
-                [data-testid="stSelectbox"]::before {
-                content: '';
-                width: 110%; 
-                height: 110%;
-                background-color: red;
-                }
-                
+                  border: 5px solid {"#11360c" if st.session_state.diff == "Easy" else "#ba9c00" if st.session_state.diff == "Medium" else "#ba0000" if st.session_state.diff == "Hard" else "#9673ff" if st.session_state.diff == "EXTREME" else ""};
+                }}
+                            
+                .st-emotion-cache-lyi571 {{
+                    color: {"white" if st.session_state.diff in ["Hard", "EXTREME"] else "black"};
+                }}
                 </style>""", unsafe_allow_html=True)
 
-                diff = st.selectbox(
+                st.session_state.diff = st.selectbox(
                 "Pilih Difficulty (level kesusahan gamenya)",
                 ["Easy", "Medium", "Hard", "EXTREME"])
                 st.html("""
@@ -949,354 +947,359 @@ elif params:
                         }
                         </style>
                         """)
-                if diff == "Easy":
-                    st.html("""
-                            <div class="grand-easy-container">
-                                <div class="easy-container">
-                                    <div class='easy-decorator1'></div>
-                                    <div class='e rowdies-bold'>E</div>
-                                    <div class='a rowdies-bold'>a</div>
-                                    <div class='s rowdies-bold'>s</div>
-                                    <div class='y rowdies-bold'>y</div>
-                                    <div class='easy-decorator2'></div>
-                                </div>
-                            </div>
-                            
-                            <style>
-                            .easy-decorator1, .easy-decorator2 {
-                            width: 2rem;
-                            height: 2rem;
-                            margin: 1.1em;
-                            border-radius: 99em;
-                            border: 2px solid #11360c;
-                            }
-                            .easy-decorator1 {
-                            background-image: linear-gradient(90deg,#195d0a,#88ec72);
-                            }
-                            .easy-decorator2 {
-                            background-image: linear-gradient(-90deg, #195d0a,#88ec72);
-                            }
-                            
-                            .grand-easy-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: visible;
-                            margin: 0 0 1.5em 0;
-                            }
-                            
-                            .easy-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #35ca00;
-                            height: 4em;
-                            width: 15em;
-                            border-radius: 4em;
-                            border: 5px solid green;
-                            box-shadow: 4px 4px 4px 4px #404040;
-                            }
-                            
-                            .e, .a, .s, .y {
-                            margin: .2rem;
-                            font-size: 2em;
-                            color: black;
-                            }
-                            .e {animation: letter-pulse 1.5s ease infinite;margin-left: 0;}
-                            .a {animation: letter-pulse 1.5s ease infinite .2s}
-                            .s {animation: letter-pulse 1.5s ease infinite .4s}
-                            .y {animation: letter-pulse 1.5s ease infinite .6s;margin-right: 0;}
-                            
-                            @keyframes letter-pulse {
-                            50% {transform: scale(1.3);}
-                            }
-                            </style>
-                            """)
-                elif diff == "Medium":
-                    st.html("""
-                            <div class='great-grand-medium-container'>
-                                <div class="grand-medium-container">
-                                    <div class="medium-decorator1"></div>
-                                    <div class="medium-decorator2"></div>
-                                    <div class="medium-container">
-                                        <div class='medium rowdies-bold'>Medium</div> 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <style>
-                            .great-grand-medium-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;}
-                            
-                            .grand-medium-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: visible;
-                            margin: 0 0 1.5em 0;
-                            z-index: 0;
-                            position: relative;
-                            max-width: 100%;
-                            }
-                            
-                            .medium-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #ffd601;
-                            height: 4em;
-                            width: 15em;
-                            border-radius: 2em 0 2em 0;
-                            border: 5px solid #ba9c00;
-                            box-shadow: 4px 4px 4px 4px #404040;
-                            z-index: 1;
-                            overflow: hidden;
-                            position: relative;
-                            }
-                            
-                            .medium {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            font-size: 2em;
-                            color: #d6a12d;
-                            mix-blend-mode: difference;
-                            z-index: 3;
-                            height: 4em;
-                            width: 5em;
-                            position: relative;
-                            overflow: hidden;
-                            }
-                            .medium::before {
-                            content: "";
-                            height: 32%;
-                            width: 9rem;
-                            background-color: yellow;
-                            position: absolute;
-                            z-index: 0;
-                            mix-blend-mode: difference;
-                            left: 0;
-                            transform: translate(-95%);
-                            animation: blendmode-slide 4s ease-in-out infinite;
-                            }
-                            
-                            .medium-decorator1 {
-                            width: 2.25em;
-                            height: 2.25em;
-                            background-color: #d67f2d;
-                            position: absolute;
-                            box-shadow: inset -2px 2px 2px 2px #87490f;
-                            border: 2px solid black;
-                            top: -15%;
-                            left: 90%;
-                            z-index: 9;
-                            }
-                            .medium-decorator2 {
-                            content: "";
-                            width: 2.25em;
-                            height: 2.25em;
-                            background-color: #d67f2d;
-                            position: absolute;
-                            box-shadow: inset 2px -2px 2px 2px #87490f;
-                            border: 2px solid black;
-                            bottom: -15%;
-                            right: 90%;
-                            z-index: 9;
-                            }
-                            
-                            @keyframes blendmode-slide {
-                                50% {transform: translate(105%);}
-                            }
-                            
-                            </style>
-                            """)
-                elif diff == "Hard":
-                    st.html("""<div class="grand-hard-container">
-                                <div class='hard-decorator1'></div>
-                                <div class='hard-decorator2'></div>
-                                <div class="hard-container">
-                                    <div class='hard rowdies-bold'>Hard</div>
-                                </div>
-                            </div>
-                            
-                            <style>
-                            .hard-decorator1, .hard-decorator2 {
-                            width: 2.3rem;
-                            height: 2.3rem;
-                            margin: 1.1em;
-                            border-radius: 99em;
-                            position: absolute;
-                            z-index: 5;
-                            background-color: black;
-                            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-                            animation: hard-star-pulse 1.5s ease-in-out infinite;
-                            }
-                            .hard-decorator1 {
-                            transform: translate(-293%);
-                            }
-                            .hard-decorator2 {
-                            transform: translate(293%);
-                            }
-                            
-                            
-                            .grand-hard-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: visible;
-                            margin: 0 0 1.5em 0;
-                            }
-                            
-                            .hard-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #ff3c19;
-                            height: 4em;
-                            width: 15em;
-                            border-radius: 0em;
-                            border: .4rem solid #ba0000;
-                            box-shadow: 4px 4px 4px 4px #404040;
-                            position: relative;
-                            animation: hard-color-pulse 2s ease infinite;
-                            }
-                            
-                            .hard {
-                            font-size: 2em;
-                            color: black
-                            }
-                            
-                            .hard-container::before {
-                            content: "";
-                            width: 25%;
-                            height: 170%;
-                            left: -10%;
-                            background-color: #6c0202;
-                            position: absolute;
-                            border-radius: .35em;
-                            border: 3px solid black;
-                            box-shadow: inset 2px 2px 3px 3px darkred;
-                            }
-                            .hard-container::after {
-                            content: "";
-                            width: 25%;
-                            height: 170%;
-                            right: -10%;
-                            background-color: #6c0202;
-                            position: absolute;
-                            border-radius: .35em;
-                            border: 3px solid black;
-                            box-shadow: inset -2px 2px 3px 3px darkred;
-                            }
-                            
-                            @keyframes hard-color-pulse {
-                                50% {background-color: #6e0404;}
-                            }
-                            @keyframes hard-star-pulse {
-                                50% {background-color: #d90404;}
-                            }
-                            </style>
-                            """)
-                elif diff == "EXTREME":
-                    st.html("""
-                            <div class="great-grand-extreme-container">
-                                <div class="grand-extreme-container">
-                                    <div class="extreme-container">
-                                        <div class='extreme-decorator2'></div>
-                                        <div class='extreme-decorator1'></div>
-                                    </div>
-                                    <div class='extreme rowdies-bold'>EXTREME</div>
-                                </div>
-                            </div>
-                            
-                            <style>
-                            .great-grand-extreme-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: hidden;
-                            }
-                            
-                            .extreme-decorator1, .extreme-decorator2 {
-                            width: 60px;
-                            height: 40px;
-                            background-color: #7315bf;
-                            position: absolute;
-                            border-radius: .35em 0 0 .35em;
-                            z-index: 0;
-                            animation: spike 1.15s ease infinite;
-                            clip-path: polygon(100% 0, 75% 50%, 100% 100%);
-                            }
-                            .extreme-decorator1 {
-                            transform: translate(-250%);
-                            }
-                            .extreme-decorator2 {
-                            transform:translate(250%) rotateZ(180deg)
-                            }
+                
+                if st.session_state.diff != st.session_state.diff_chk:
+                    st.session_state.diff_chk = st.session_state.diff
+                    st.rerun()
 
-                            .grand-extreme-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: hidden;
-                            padding: 1.25em;
-                            position: relative;
-                            height: auto;
-                            width: 55%;
-                            border: 2px solid transparent;
-                            animation: extreme-card .5s ease infinite;
-                            }
-                            
-                            .extreme-container {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #9002d4;
-                            height: 4em;
-                            width: 15em;
-                            border-radius: 0em;
-                            border: .4rem solid #9673ff;
-                            position: relative;
-                            mix-blend-mode: difference;
-                            animation: extreme-color-pulse 1.45s ease-in-out infinite;
-                            z-index: 0;
-                            box-shadow: 0px 0px 12px 12px rgba(255,0,0,.5);
-                            }
-                            
-                            .extreme {
-                            font-size: 2em;
-                            color: #b726fc;
-                            mix-blend-mode: difference;
-                            position: absolute;
-                            z-index: 0;                     
-                            }
-                            
-                            @keyframes extreme-color-pulse {
-                                50% {background-color: #45155c;}
-                            }
-                            @keyframes spike {
-                                33% {clip-path: polygon(100% 0, 75% 50%, 100% 100%);}
-                                66% {clip-path: polygon(100% 0, 25% 50%, 100% 100%);}
-                            }
-                            @keyframes extreme-card {
-                                33% {transform: rotateZ(3deg);}
-                                58% {transform: rotateZ(-5deg);}
-                                78% {transform: rotateZ(2deg);}
-                            }
-                            
-                            @media (max-width: 600px) {
-                                .grand-extreme-container {
-                                width: 100%;
+                match st.session_state.diff:
+                    case "Easy":
+                        st.html("""
+                                <div class="grand-easy-container">
+                                    <div class="easy-container">
+                                        <div class='easy-decorator1'></div>
+                                        <div class='e rowdies-bold'>E</div>
+                                        <div class='a rowdies-bold'>a</div>
+                                        <div class='s rowdies-bold'>s</div>
+                                        <div class='y rowdies-bold'>y</div>
+                                        <div class='easy-decorator2'></div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                .easy-decorator1, .easy-decorator2 {
+                                width: 2rem;
+                                height: 2rem;
+                                margin: 1.1em;
+                                border-radius: 99em;
+                                border: 2px solid #11360c;
                                 }
-                            }
-                            </style>""")
+                                .easy-decorator1 {
+                                background-image: linear-gradient(90deg,#195d0a,#88ec72);
+                                }
+                                .easy-decorator2 {
+                                background-image: linear-gradient(-90deg, #195d0a,#88ec72);
+                                }
+                                
+                                .grand-easy-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: visible;
+                                margin: 0 0 1.5em 0;
+                                }
+                                
+                                .easy-container {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #35ca00;
+                                height: 4em;
+                                width: 15em;
+                                border-radius: 4em;
+                                border: 5px solid green;
+                                box-shadow: 4px 4px 4px 4px #404040;
+                                }
+                                
+                                .e, .a, .s, .y {
+                                margin: .2rem;
+                                font-size: 2em;
+                                color: black;
+                                }
+                                .e {animation: letter-pulse 1.5s ease infinite;margin-left: 0;}
+                                .a {animation: letter-pulse 1.5s ease infinite .2s}
+                                .s {animation: letter-pulse 1.5s ease infinite .4s}
+                                .y {animation: letter-pulse 1.5s ease infinite .6s;margin-right: 0;}
+                                
+                                @keyframes letter-pulse {
+                                50% {transform: scale(1.3);}
+                                }
+                                </style>
+                                """)
+                    case "Medium":
+                        st.html("""
+                                <div class='great-grand-medium-container'>
+                                    <div class="grand-medium-container">
+                                        <div class="medium-decorator1"></div>
+                                        <div class="medium-decorator2"></div>
+                                        <div class="medium-container">
+                                            <div class='medium rowdies-bold'>Medium</div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                .great-grand-medium-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;}
+                                
+                                .grand-medium-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: visible;
+                                margin: 0 0 1.5em 0;
+                                z-index: 0;
+                                position: relative;
+                                max-width: 100%;
+                                }
+                                
+                                .medium-container {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #ffd601;
+                                height: 4em;
+                                width: 15em;
+                                border-radius: 2em 0 2em 0;
+                                border: 5px solid #ba9c00;
+                                box-shadow: 4px 4px 4px 4px #404040;
+                                z-index: 1;
+                                overflow: hidden;
+                                position: relative;
+                                }
+                                
+                                .medium {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 2em;
+                                color: #d6a12d;
+                                mix-blend-mode: difference;
+                                z-index: 3;
+                                height: 4em;
+                                width: 5em;
+                                position: relative;
+                                overflow: hidden;
+                                }
+                                .medium::before {
+                                content: "";
+                                height: 32%;
+                                width: 9rem;
+                                background-color: yellow;
+                                position: absolute;
+                                z-index: 0;
+                                mix-blend-mode: difference;
+                                left: 0;
+                                transform: translate(-95%);
+                                animation: blendmode-slide 4s ease-in-out infinite;
+                                }
+                                
+                                .medium-decorator1 {
+                                width: 2.25em;
+                                height: 2.25em;
+                                background-color: #d67f2d;
+                                position: absolute;
+                                box-shadow: inset -2px 2px 2px 2px #87490f;
+                                border: 2px solid black;
+                                top: -15%;
+                                left: 90%;
+                                z-index: 9;
+                                }
+                                .medium-decorator2 {
+                                content: "";
+                                width: 2.25em;
+                                height: 2.25em;
+                                background-color: #d67f2d;
+                                position: absolute;
+                                box-shadow: inset 2px -2px 2px 2px #87490f;
+                                border: 2px solid black;
+                                bottom: -15%;
+                                right: 90%;
+                                z-index: 9;
+                                }
+                                
+                                @keyframes blendmode-slide {
+                                    50% {transform: translate(105%);}
+                                }
+                                
+                                </style>
+                                """)
+                    case "Hard":
+                        st.html("""<div class="grand-hard-container">
+                                    <div class='hard-decorator1'></div>
+                                    <div class='hard-decorator2'></div>
+                                    <div class="hard-container">
+                                        <div class='hard rowdies-bold'>Hard</div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                .hard-decorator1, .hard-decorator2 {
+                                width: 2.3rem;
+                                height: 2.3rem;
+                                margin: 1.1em;
+                                border-radius: 99em;
+                                position: absolute;
+                                z-index: 5;
+                                background-color: black;
+                                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+                                animation: hard-star-pulse 1.5s ease-in-out infinite;
+                                }
+                                .hard-decorator1 {
+                                transform: translate(-293%);
+                                }
+                                .hard-decorator2 {
+                                transform: translate(293%);
+                                }
+                                
+                                
+                                .grand-hard-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: visible;
+                                margin: 0 0 1.5em 0;
+                                }
+                                
+                                .hard-container {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #ff3c19;
+                                height: 4em;
+                                width: 15em;
+                                border-radius: 0em;
+                                border: .4rem solid #ba0000;
+                                box-shadow: 4px 4px 4px 4px #404040;
+                                position: relative;
+                                animation: hard-color-pulse 2s ease infinite;
+                                }
+                                
+                                .hard {
+                                font-size: 2em;
+                                color: black
+                                }
+                                
+                                .hard-container::before {
+                                content: "";
+                                width: 25%;
+                                height: 170%;
+                                left: -10%;
+                                background-color: #6c0202;
+                                position: absolute;
+                                border-radius: .35em;
+                                border: 3px solid black;
+                                box-shadow: inset 2px 2px 3px 3px darkred;
+                                }
+                                .hard-container::after {
+                                content: "";
+                                width: 25%;
+                                height: 170%;
+                                right: -10%;
+                                background-color: #6c0202;
+                                position: absolute;
+                                border-radius: .35em;
+                                border: 3px solid black;
+                                box-shadow: inset -2px 2px 3px 3px darkred;
+                                }
+                                
+                                @keyframes hard-color-pulse {
+                                    50% {background-color: #6e0404;}
+                                }
+                                @keyframes hard-star-pulse {
+                                    50% {background-color: #d90404;}
+                                }
+                                </style>
+                                """)
+                    case "EXTREME":
+                        st.html("""
+                                <div class="great-grand-extreme-container">
+                                    <div class="grand-extreme-container">
+                                        <div class="extreme-container">
+                                            <div class='extreme-decorator2'></div>
+                                            <div class='extreme-decorator1'></div>
+                                        </div>
+                                        <div class='extreme rowdies-bold'>EXTREME</div>
+                                    </div>
+                                </div>
+                                
+                                <style>
+                                .great-grand-extreme-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                }
+                                
+                                .extreme-decorator1, .extreme-decorator2 {
+                                width: 60px;
+                                height: 40px;
+                                background-color: #7315bf;
+                                position: absolute;
+                                border-radius: .35em 0 0 .35em;
+                                z-index: 0;
+                                animation: spike 1.15s ease infinite;
+                                clip-path: polygon(100% 0, 75% 50%, 100% 100%);
+                                }
+                                .extreme-decorator1 {
+                                transform: translate(-250%);
+                                }
+                                .extreme-decorator2 {
+                                transform:translate(250%) rotateZ(180deg)
+                                }
+
+                                .grand-extreme-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                padding: 1.25em;
+                                position: relative;
+                                height: auto;
+                                width: 55%;
+                                border: 2px solid transparent;
+                                animation: extreme-card .5s ease infinite;
+                                }
+                                
+                                .extreme-container {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: #9002d4;
+                                height: 4em;
+                                width: 15em;
+                                border-radius: 0em;
+                                border: .4rem solid #9673ff;
+                                position: relative;
+                                mix-blend-mode: difference;
+                                animation: extreme-color-pulse 1.45s ease-in-out infinite;
+                                z-index: 0;
+                                box-shadow: 0px 0px 12px 12px rgba(252, 62, 196, .5);
+                                }
+                                
+                                .extreme {
+                                font-size: 2em;
+                                color: #b726fc;
+                                mix-blend-mode: difference;
+                                position: absolute;
+                                z-index: 0;                     
+                                }
+                                
+                                @keyframes extreme-color-pulse {
+                                    50% {background-color: #45155c;}
+                                }
+                                @keyframes spike {
+                                    33% {clip-path: polygon(100% 0, 75% 50%, 100% 100%);}
+                                    66% {clip-path: polygon(100% 0, 25% 50%, 100% 100%);}
+                                }
+                                @keyframes extreme-card {
+                                    33% {transform: rotateZ(3deg);}
+                                    58% {transform: rotateZ(-5deg);}
+                                    78% {transform: rotateZ(2deg);}
+                                }
+                                
+                                @media (max-width: 600px) {
+                                    .grand-extreme-container {
+                                    width: 100%;
+                                    }
+                                }
+                                </style>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Play"):
                             st.session_state.menu_select = 3
-                            st.session_state.diff = diff
                             st.session_state.time = math.floor(time.time())
                             st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                             st.rerun()
