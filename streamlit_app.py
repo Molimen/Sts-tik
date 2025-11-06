@@ -893,7 +893,7 @@ elif params:
                         
                         @media (max-width: 650px) {{
                             .diff-title-text {{
-                            font-size: 2.85em;
+                            font-size: 2.45em;
                             }}
                         }}
                         </style>
@@ -1434,3 +1434,4 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
