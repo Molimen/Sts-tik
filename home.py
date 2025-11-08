@@ -458,7 +458,6 @@ def home():
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 2px solid black;
         height: auto;
         margin: 1.2em;
         }}
