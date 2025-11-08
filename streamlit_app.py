@@ -1290,7 +1290,7 @@ elif params:
                         with stylable_container(key="center1",
                                                 css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                             if st.button("Ready"):
-                                st.session_state.menu_select = 3
+                                st.session_state.menu_select = 2
                                 st.session_state.round += 1
                                 st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                                 st.session_state.time = math.floor(time.time())
