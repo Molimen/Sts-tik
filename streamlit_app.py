@@ -491,6 +491,7 @@ css_style = """
                     """
 
 if params.get("select", "") == "":
+    st.set_page_config(layout="wide")
     home.home()
     st.html(f"""
             <div class="grand-divider-container">
