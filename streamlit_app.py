@@ -422,7 +422,6 @@ button:hover {{
 with st.sidebar:
     with stylable_container(key="sidebar_home", css_styles=button_sidebar_home):
         if st.button("", key="sidebar_btn_home"):
-            st.set_page_config(layout="wide")
             st.query_params.clear()
             games_reset()
 
@@ -491,7 +490,6 @@ css_style = """
                     """
 
 if params.get("select", "") == "":
-    st.set_page_config(layout="wide")
     home.home()
     st.html(f"""
             <div class="grand-divider-container">
