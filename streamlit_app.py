@@ -8,6 +8,7 @@ import extra
 import time
 import math
 import about_us
+import home
 
 st.markdown("""
             <style>
@@ -218,7 +219,7 @@ def games():
         progress_placeholder.progress(elapsed / TIME_LIMIT)
         time.sleep(.5)
 
-    st.session_state.menu_select = 4
+    st.session_state.menu_select = 3
     st.rerun()
 
 params = st.query_params
@@ -364,11 +365,11 @@ button, a, [role="button"] {{
 </style>
 """, unsafe_allow_html=True)
 
-button_sidebar_games = f"""
+button_sidebar_home = f"""
 button {{
     width: 60px;
     height: 60px;
-    background-image: url('data:image/png;base64,{get_base64("assets/games.png")}');
+    background-image: url('data:image/png;base64,{get_base64("assets/home.png")}');
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -419,16 +420,16 @@ button:hover {{
 """
 
 with st.sidebar:
-    with stylable_container(key="sidebar_games", css_styles=button_sidebar_games):
-        if st.button("", key="sidebar_btn_games"):
+    with stylable_container(key="sidebar_home", css_styles=button_sidebar_home):
+        if st.button("", key="sidebar_btn_home"):
+            st.set_page_config(layout="wide")
             st.query_params.clear()
-            st.query_params["select"] = "games"
             games_reset()
 
     st.markdown(
         """
         <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
-                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Permainan</span>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Utama</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -436,6 +437,7 @@ with st.sidebar:
 
     with stylable_container(key="sidebar_tempat_extras", css_styles=button_sidebar_extras):
         if st.button("",key="sidebar_btn_tempat_duduk"):
+            st.set_page_config(layout="centered")
             st.query_params.clear()
             st.query_params["select"] = "extras"
             games_reset()
@@ -451,6 +453,7 @@ with st.sidebar:
 
     with stylable_container(key="sidebar_about", css_styles=button_sidebar_about):
         if st.button("",key="sidebar_btn_about"):
+            st.set_page_config(layout="centered")
             st.query_params.clear()
             st.query_params["select"] = "about"
             games_reset()
@@ -488,248 +491,233 @@ css_style = """
                     """
 
 if params.get("select", "") == "":
-    st.query_params.clear()
-    st.query_params["select"] = "games"
-    st.rerun()
+    home.home()
+    st.html(f"""
+            <div class="grand-divider-container">
+                <div class="divider-container">
+                    <div class="divider"></div>
+                </div>
+            </div>
+            
+            <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
+            
+            <style>
+            .grand-divider-container {{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 1em;
+            padding-bottom: 0;
+            }}
+            
+            .rainbow-text {{
+            display: flex;
+            justify-content:center;
+            align-items:center;
+            font-size: 2rem;
+            text-align: center;
+            background-color: white;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            animation: rainbow 5s linear infinite;
+            }}
+            
+            .title-container {{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            height: 15em;
+            max-width: 100%;
+            position: relative;
+            justify-content: center;
+            align-items: left;
+            left: 1em;
+            flex-wrap: wrap;
+            left: 0;
+            padding-left: 2.25em;
+            padding-right: 2.25em;
+            margin-bottom: 2.15em;
+            background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+            z-index: 2;
+            border-radius: 2em;
+            border: 8px solid darkorange;
+            }}
+            
+            .title-spelling, .title-bee {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 6.55em;
+            min-width: 4em;
+            height: 1.65em;
+            font-size: 2.55em;
+            border-radius: .5rem;
+            z-index: 2;
+            margin: 0.3rem;
+            }}
+            
+            .title-spelling {{
+            background-color: #e8b125;
+            color: black;
+            border: 6px solid #a88019;
+            border-radius: 1.5em .25em .65em 0em; 
+            }}
+            
+            .title-bee {{
+            background-color: #8c6500;
+            color: white;
+            border: 6px solid #5e4401;
+            border-radius: .65em 0em 1.5em .25em;
+            }}
+            
+            .title-image {{
+            display: flex;
+            height: 135px;
+            margin: 1rem;
+            text-align: center;
+            padding: auto;
+            object-fit: contain;
+            transform: rotate(-7deg);
+            animation: bee 2.25s ease-in-out infinite;
+            }}
+            
+            .text-container {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }}
+            
+            .text-title {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3em;
+            }}
+            
+            .text-content {{
+            text-align: center;
+            }}
+            
+            .divider-container, .divider-container2 {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1px;
+            z-index: 1;
+            width: 100%;
+            height: .5rem;
+            position: relative;
+            margin: 3em;
+            margin-top: 1.25em;
+            }}
+            
+            .divider-container::before, .divider-container::after, .divider-container2::before, .divider-container2::after {{
+            transition: all 1s ease;
+            }}
+            .divider-container::before {{
+            content: "";
+            top: -197%;
+            width: 40px;
+            height: 40px;
+            background-color: #232324;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: bg-divider-scale 7s ease-out infinite;
+            }}
+            .divider-container2::before {{
+            content: "";
+            content: "";
+            top: -197%;
+            width: 40px;
+            height: 40px;
+            background-color: #232324;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: bg-divider-scale 7s ease-out reverse infinite;
+            }}
+            .divider-container::after {{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: divider-spin 7s ease infinite;
+            }}
+            .divider-container2::after {{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: divider-spin 7s ease reverse infinite;
+            }}
+            .divider {{
+            height: .35rem;
+            width: 100%;
+            background-image: linear-gradient(90deg, transparent, white,white, transparent);
+            margin: 1.5em 0;
+            }}
+            
+            @keyframes bee {{
+                0% {{
+                transform: rotate(-7deg);
+                }}
+                50% {{
+                transform: rotate(18deg);
+                }}
+            }}
+            @keyframes rainbow {{
+            0% {{background-color: white}}
+            12.5% {{background-color: red}}
+            25% {{background-color: orange}}
+            37.5% {{background-color: yellow}}
+            50% {{background-color: green}}
+            62.5% {{background-color: cyan}}
+            75% {{background-color: blue}}
+            87.5% {{background-color: purple}}
+            100% {{background-color: white}}
+            }}
+            
+            @media (max-width: 650px) {{
+                .title-image {{
+                display: none;
+                }}
+                
+                .title-spelling, .title-bee {{
+                max-width: 100%;
+                }}
+            }}
+            </style>
+            """)
+    st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
+                <style>
+                .heading4 {{
+                text-align: center;
+                }}
+                
+                sup {{
+                font-size: .55em;
+                }}
+                </style>
+                """, unsafe_allow_html=True)
+
+    with stylable_container(key="style", css_styles=css_style):
+        with stylable_container(key="center1",
+                                css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+            if st.button("Mainin minigamenya!"):
+                st.query_params.clear()
+                st.query_params["select"] = "games"
+                st.set_page_config(layout="centered")
+                st.rerun()
 elif params:
     if params.get("select") == "games":
         match st.session_state.menu_select:
             case 0:
-                judul = """Spelling bee adalah sebuah kontes edukasi dan kompetitif di mana peserta diuji kemampuannya mengeja kata-kata (umumnya bahasa Inggris) secara lisan. 
-                Seorang pembaca akan memberikan kata, dan peserta harus menyebutkan urutan huruf-hurufnya dengan benar untuk maju ke babak berikutnya. 
-                Kompetisi ini bertujuan untuk meningkatkan penguasaan kosa kata, ejaan, dan pemahaman bahasa secara mendalam. (Tapi dalam konteks di game ini katanya di ketik full)"""
-                st.html(f"""
-                        <div class="title-container">
-                            <div class="title-spelling bbh-sans-bogle-regular">Spelling</div>
-                            <div class="title-bee bbh-sans-bogle-regular">Bee</div>
-                            <img class="title-image" src='data:image/png;base64,{get_base64("assets/games-title-art-img.jpg")}' alt="Bee image here">
-                        </div>
-                        
-                        <div class"text-container">
-                            <div class="text-title momo-trust-display-regular">Apa itu Spelling Bee?</div>
-                            <div class="text-content arima-isi">{judul}</div>
-                        </div>
-                        
-                        <div class="grand-divider-container">
-                            <div class="divider-container">
-                                <div class="divider"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
-                        
-                        <style>
-                        .grand-divider-container {{
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        padding-top: 1em;
-                        padding-bottom: 0;
-                        }}
-                        
-                        .rainbow-text {{
-                        display: flex;
-                        justify-content:center;
-                        align-items:center;
-                        font-size: 2rem;
-                        text-align: center;
-                        background-color: white;
-                        background-clip: text;
-                        color: transparent;
-                        margin: 0;
-                        animation: rainbow 5s linear infinite;
-                        }}
-                        
-                        .title-container {{
-                        display: flex;
-                        flex-direction: column;
-                        text-align: center;
-                        height: 15em;
-                        max-width: 100%;
-                        position: relative;
-                        justify-content: center;
-                        align-items: left;
-                        left: 1em;
-                        flex-wrap: wrap;
-                        left: 0;
-                        padding-left: 2.25em;
-                        padding-right: 2.25em;
-                        margin-bottom: 2.15em;
-                        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
-                        z-index: 2;
-                        border-radius: 2em;
-                        border: 8px solid darkorange;
-                        }}
-                        
-                        .title-spelling, .title-bee {{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        max-width: 6.55em;
-                        min-width: 4em;
-                        height: 1.65em;
-                        font-size: 2.55em;
-                        border-radius: .5rem;
-                        z-index: 2;
-                        margin: 0.3rem;
-                        }}
-                        
-                        .title-spelling {{
-                        background-color: #e8b125;
-                        color: black;
-                        border: 6px solid #a88019;
-                        border-radius: 1.5em .25em .65em 0em; 
-                        }}
-                        
-                        .title-bee {{
-                        background-color: #8c6500;
-                        color: white;
-                        border: 6px solid #5e4401;
-                        border-radius: .65em 0em 1.5em .25em;
-                        }}
-                        
-                        .title-image {{
-                        display: flex;
-                        height: 135px;
-                        margin: 1rem;
-                        text-align: center;
-                        padding: auto;
-                        object-fit: contain;
-                        transform: rotate(-7deg);
-                        animation: bee 2.25s ease-in-out infinite;
-                        }}
-                        
-                        .text-container {{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        }}
-                        
-                        .text-title {{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: 1.3em;
-                        }}
-                        
-                        .text-content {{
-                        text-align: center;
-                        }}
-                        
-                        .divider-container, .divider-container2 {{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-align: center;
-                        padding: 1px;
-                        z-index: 1;
-                        width: 100%;
-                        height: .5rem;
-                        position: relative;
-                        margin: 3em;
-                        margin-top: 1.25em;
-                        }}
-                        
-                        .divider-container::before, .divider-container::after, .divider-container2::before, .divider-container2::after {{
-                        transition: all 1s ease;
-                        }}
-                        .divider-container::before {{
-                        content: "";
-                        top: -197%;
-                        width: 40px;
-                        height: 40px;
-                        background-color: #232324;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out infinite;
-                        }}
-                        .divider-container2::before {{
-                        content: "";
-                        content: "";
-                        top: -197%;
-                        width: 40px;
-                        height: 40px;
-                        background-color: #232324;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out reverse infinite;
-                        }}
-                        .divider-container::after {{
-                        content: "";
-                        width: 20px;
-                        height: 20px;
-                        background-color: white;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: divider-spin 7s ease infinite;
-                        }}
-                        .divider-container2::after {{
-                        content: "";
-                        width: 20px;
-                        height: 20px;
-                        background-color: white;
-                        position: absolute;
-                        transform: rotate(45deg);
-                        animation: divider-spin 7s ease reverse infinite;
-                        }}
-                        .divider {{
-                        height: .35rem;
-                        width: 100%;
-                        background-image: linear-gradient(90deg, transparent, white,white, transparent);
-                        margin: 1.5em 0;
-                        }}
-                        
-                        @keyframes bee {{
-                            0% {{
-                            transform: rotate(-7deg);
-                            }}
-                            50% {{
-                            transform: rotate(18deg);
-                            }}
-                        }}
-                        @keyframes rainbow {{
-                        0% {{background-color: white}}
-                        12.5% {{background-color: red}}
-                        25% {{background-color: orange}}
-                        37.5% {{background-color: yellow}}
-                        50% {{background-color: green}}
-                        62.5% {{background-color: cyan}}
-                        75% {{background-color: blue}}
-                        87.5% {{background-color: purple}}
-                        100% {{background-color: white}}
-                        }}
-                        
-                        @media (max-width: 650px) {{
-                            .title-image {{
-                            display: none;
-                            }}
-                            
-                            .title-spelling, .title-bee {{
-                            max-width: 100%;
-                            }}
-                        }}
-                        </style>
-                        """)
-                st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
-                            <style>
-                            .heading4 {{
-                            text-align: center;
-                            }}
-                            
-                            sup {{
-                            font-size: .55em;
-                            }}
-                            </style>
-                            """, unsafe_allow_html=True)
-
-                with stylable_container(key="style", css_styles=css_style):
-                    with stylable_container(key="center1",
-                                            css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
-                        if st.button("Mainin minigamenya!"):
-                            st.session_state.menu_select = 1
-                            st.rerun()
-            case 1:
                 instruction = """
 📜 Aturan Permainan: <br>
 
@@ -819,9 +807,9 @@ elif params:
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Saya sudah paham"):
-                            st.session_state.menu_select = 2
+                            st.session_state.menu_select = 1
                             st.rerun()
-            case 2:
+            case 1:
                 st.html(f"""
                         <div class="diff-container">
                             <div class='diff-title'></div>
@@ -1287,13 +1275,13 @@ elif params:
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Play"):
-                            st.session_state.menu_select = 3
+                            st.session_state.menu_select = 2
                             st.session_state.time = math.floor(time.time())
                             st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                             st.rerun()
-            case 3:
+            case 2:
                 games()
-            case 4:
+            case 3:
                 if st.session_state.round != ROUND:
                     st.markdown(f"""
                                 <div class="round-count rowdies-regular">Round: {'{:02d}'.format(st.session_state.round+1)}/{ROUND:02d}</div>
@@ -1433,6 +1421,7 @@ elif params:
                         with stylable_container(key="center1",
                                                 css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                             if st.button("Back"):
+                                st.query_params.clear()
                                 games_reset()
                                 st.rerun()
 
