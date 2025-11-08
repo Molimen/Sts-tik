@@ -308,7 +308,7 @@ spelling_bee_words = {
 }
 
 # none existance word on dict.youdao
-#
+# chargoggagoggmanchauggagoggchaubunagungamaugg
 
 st.markdown("""
 <style>
@@ -525,65 +525,6 @@ if params.get("select", "") == "":
             animation: rainbow 5s linear infinite;
             }}
             
-            .title-container {{
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            height: 15em;
-            max-width: 100%;
-            position: relative;
-            justify-content: center;
-            align-items: left;
-            left: 1em;
-            flex-wrap: wrap;
-            left: 0;
-            padding-left: 2.25em;
-            padding-right: 2.25em;
-            margin-bottom: 2.15em;
-            background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
-            z-index: 2;
-            border-radius: 2em;
-            border: 8px solid darkorange;
-            }}
-            
-            .title-spelling, .title-bee {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 6.55em;
-            min-width: 4em;
-            height: 1.65em;
-            font-size: 2.55em;
-            border-radius: .5rem;
-            z-index: 2;
-            margin: 0.3rem;
-            }}
-            
-            .title-spelling {{
-            background-color: #e8b125;
-            color: black;
-            border: 6px solid #a88019;
-            border-radius: 1.5em .25em .65em 0em; 
-            }}
-            
-            .title-bee {{
-            background-color: #8c6500;
-            color: white;
-            border: 6px solid #5e4401;
-            border-radius: .65em 0em 1.5em .25em;
-            }}
-            
-            .title-image {{
-            display: flex;
-            height: 135px;
-            margin: 1rem;
-            text-align: center;
-            padding: auto;
-            object-fit: contain;
-            transform: rotate(-7deg);
-            animation: bee 2.25s ease-in-out infinite;
-            }}
-            
             .text-container {{
             display: flex;
             justify-content: center;
@@ -684,15 +625,6 @@ if params.get("select", "") == "":
             100% {{background-color: white}}
             }}
             
-            @media (max-width: 650px) {{
-                .title-image {{
-                display: none;
-                }}
-                
-                .title-spelling, .title-bee {{
-                max-width: 100%;
-                }}
-            }}
             </style>
             """)
     st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
@@ -1430,6 +1362,3 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
-
-
-

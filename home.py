@@ -10,10 +10,10 @@ text1 = """Spelling Bee adalah kompetisi mengeja kata dalam bahasa Inggris, di m
 text2 = """Kata “bee” dalam Spelling Bee tidak berarti lebah 🐝.<br>
 Dalam bahasa Inggris lama, “bee” berarti perkumpulan orang untuk melakukan suatu kegiatan bersama, seperti quilting bee (acara menjahit bersama). Jadi, Spelling Bee berarti acara bersama untuk mengeja."""
 
-text3 = """<h3>1700-an (Abad ke-18)</h3>
+text3 = """ ===== 1700-an (Abad ke-18) =====<br>
 - Tradisi mengeja sudah populer di sekolah-sekolah di Amerika dan Inggris untuk melatih ejaan bahasa Inggris yang rumit. <br>
 - Buku terkenal "The Blue-backed Speller" karya Noah Webster (1786) digunakan secara luas untuk mengajar ejaan.
-<h3>1825</h3>
+<br>===== Tahun 1825 =====<br>
 - Istilah “spelling bee” mulai digunakan secara umum di Amerika Serikat untuk menyebut lomba mengeja di sekolah-sekolah."""
 
 text4 = """- Setelah sukses di Amerika, Spelling Bee mulai menyebar ke negara-negara lain seperti Kanada, Australia, India, Filipina, dan bahkan Indonesia.<br>
@@ -284,6 +284,7 @@ def home():
             font-size: 2.1em;
             color: white;
             margin-bottom: 15px;
+            line-height: 1.25em;
         }}
         
         .divider-container, .divider-container2 {{
@@ -354,7 +355,7 @@ def home():
         border: 3px solid black;
         background-color: #383839;
         margin: 1.25em;
-        line-height: 2.25em;
+        line-height: 2rem;
         padding: 10px 10px 0px 10px;
         max-width: 90%;
         }}
@@ -452,13 +453,127 @@ def home():
                 94.08% {{ transform: scale(1); }}
                 100% {{ transform: scale(1); }}
                 }}
+        
+        .ultimate-container {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+        height: auto;
+        margin: 1.2em;
+        }}
+        
+        .title-container {{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 15em;
+        width: 44em;
+        position: relative;
+        justify-content: center;
+        align-items: left;
+        left: 1em;
+        flex-wrap: wrap;
+        left: 0;
+        padding-left: 2.15em;
+        padding-right: 2.15em;
+        background-image: url('data:image/png;base64,{get_base64("assets/games-title-img.jpg")}');
+        z-index: 2;
+        border-radius: 2em;
+        border: 8px solid darkorange;
+        }}
+        
+        .title-spelling, .title-bee {{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        max-width: 16em;
+        min-width: 4em;
+        height: 1.65em;
+        font-size: 2.55em;
+        border-radius: .5rem;
+        padding: 0.55em;
+        z-index: 2;
+        margin: 0.5rem;
+        }}
+
+        .title-spelling {{
+        background-color: #e8b125;
+        color: black;
+        border: 6px solid #a88019;
+        border-radius: 1.5em .25em .65em 0em; 
+        }}
+
+        .title-bee {{
+        background-color: #8c6500;
+        color: white;
+        border: 6px solid #5e4401;
+        border-radius: .65em 0em 1.5em .25em;
+        }}
+        
+        .title-image {{
+        display: flex;
+        height: 150px;
+        width: 275px;
+        margin: .5rem;
+        margin-left: 1em;
+        text-align: center;
+        padding: auto;
+        object-fit: contain;
+        transform: rotate(-7deg);
+        animation: bee 2.25s ease-in-out infinite;
+        }}
+        
+        @media (max-width: 975px) {{
+            .title-image {{
+            display: none;
+            }}
+
+            .title-spelling, .title-bee {{
+            max-width: 100%;
+            font-size: 2.65em;
+            padding: 1.5rem 2.2rem;
+            }}
+            
+            .title-container {{
+            paddng: 1.15em;
+            }}
+        }}
+        
+        .homecontainer, .homecontainer2 {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 100%;
+        margin: 0;
+        flex-wrap: wrap;
+        height: 100%;
+        position: relative;
+        }}
+        
+        .homecontainer {{
+        float: left;
+        flex-wrap: wrap;
+        flex-direction: row;
+        }}
+        .homecontainer2 {{
+        float: right;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        }}
         </style>
         
-        <div class="container-h1 bbh-sans-bogle-regular">
-            <h1>Spelling Bee</h1>
+        <div class="ultimate-container">
+            <div class="title-container">
+                <div class="title-spelling bbh-sans-bogle-regular">Spelling</div>
+                <div class="title-bee bbh-sans-bogle-regular">Bee</div>
+                <img class="title-image" src='data:image/png;base64,{get_base64("assets/games-title-art-img.jpg")}' alt="Bee image here">
+            </div>
         </div>
         
-        <div class="container"> 
+        <div class="homecontainer"> 
             <div class="divider-container">
                 <div class="divider"></div>
             </div>
@@ -471,20 +586,14 @@ def home():
             </div>
         </div>
 
-        <div class="container2">   
-            <div class="divider-container2">
-                <div class="divider"></div>
-            </div>
+        <div class="homecontainer2">   
             <div class="textcontainernolimit">
                 <div class="title momo-trust-display-regular">Asal-usul Nama</div>
                 <p class="arima-isi">{text2}</p>
             </div>
         </div>
 
-        <div class="container2">   
-            <div class="divider-container2">
-                <div class="divider"></div>
-            </div>
+        <div class="homecontainer2">   
             <div class="imgcontainer2">
                 <img class="img2" src="data:image/jpg;base64,{get_base64("assets/missing_texture.png")}">
             </div>
@@ -494,20 +603,14 @@ def home():
             </div>
         </div>
 
-        <div class="container2">   
-            <div class="divider-container2">
-                <div class="divider"></div>
-            </div>
+        <div class="homecontainer2">   
             <div class="textcontainernolimit">
                 <div class="title momo-trust-display-regular">Perkembangan Internasional</div>
                 <p class="arima-isi">{text4}</p>
             </div>
         </div>
 
-        <div class="container"> 
-            <div class="divider-container">
-                <div class="divider"></div>
-            </div>
+        <div class="homecontainer"> 
                 <div class="imgcontainer">
                     <img class="img1" src="data:images/jpg;base64,{get_base64("assets/missing_texture.png")}">
                 </div>
