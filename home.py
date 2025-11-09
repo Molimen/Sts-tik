@@ -129,6 +129,7 @@ def home():
                 height: 16em;
                 z-index: 6;
                 border-radius: 10px;
+                object-fit: cover;
                 }}
 
                 .imgcontainer {{
@@ -148,11 +149,11 @@ def home():
                 width: 150%;
                 position: absolute;
                 height: 150%;
-                background-image: conic-gradient(from 90deg, #ff8080, transparent, transparent,transparent, #809dff, transparent,transparent,transparent, #ff8080);
+                background-image: conic-gradient(from 90deg, #80d9ff,#e44aff,#28e032,#80d9ff);
                 z-index: 0;
                 padding: 15px;
                 border-radius: 10px;
-                animation: 6s rotatebg linear infinite;
+                animation: 2.25s rotatebg linear infinite;
                 }}
                 .imgcontainer::before{{
                 content: "";
@@ -165,9 +166,10 @@ def home():
                 height: 16em;
                 z-index: 6;
                 border-radius: 10px;
+                object-fit: cover;
                 }}
 
-                .imgcontainer2 {{
+                .imgcontainer2, .imgcontainer3 {{
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -179,20 +181,27 @@ def home():
                 overflow: hidden;
                 padding: 8px;
                 }}
-                .imgcontainer2::after, .imgcontainer2::before {{
+                .imgcontainer2::after, .imgcontainer2::before, .imgcontainer3::before, .imgcontainer3::after {{
                 content: "";
                 width: 200%;
                 position: absolute;
                 height: 200%;
-                background-image: conic-gradient(from 0deg, #ffff80, transparent, transparent,transparent, #86ff80, transparent,transparent,transparent, #ffff80);
                 z-index: 0;
                 padding: 10px;
                 border-radius: 10px;
                 overflow: hidden;
-                animation: 6s rotatebg linear infinite;
                 }}
                 .imgcontainer2::before{{
                     filter: blur(1em);
+                }}
+                .imgcontainer2::before, .imgcontainer2::after {{
+                background-image: conic-gradient(from 0deg,#c22323,#8823c2,#2397c2,#c22323);
+                animation: 2.25s rotatebg linear reverse infinite;
+                }} 
+                
+                .imgcontainer3::before, .imgcontainer3::after {{
+                background-image: conic-gradient(from 0deg, #d69d00,#00d6ab,#d6008f,#d69d00);
+                animation: 2.25s rotatebg linear infinite;
                 }}
 
                 @keyframes rotatebg {{
@@ -524,7 +533,7 @@ def home():
         animation: bee 2.25s ease-in-out infinite;
         }}
         
-        @media (max-width: 975px) {{
+        @media (max-width: 700px) {{
             .title-image {{
             display: none;
             }}
@@ -562,6 +571,26 @@ def home():
         flex-wrap: wrap;
         flex-direction: row-reverse;
         }}
+        
+        .credit {{
+        color: #1641c4;
+        padding: 0em;
+        text-align:
+        border-radius: 0.3em;
+        padding: 0 0.2em;
+        letter-spacing: 0.07em;
+        text-decoration: underline;
+        }}
+        
+        .creditcontainer {{
+        border: 1px solid transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: .72em;
+        margin: 0;
+        }}
         </style>
         
         <div class="ultimate-container">
@@ -577,7 +606,7 @@ def home():
                 <div class="divider"></div>
             </div>
                 <div class="imgcontainer">
-                    <img class="img1" src="data:images/jpg;base64,{get_base64("assets/missing_texture.png")}">
+                    <img class="img1" src="data:images/jpg;base64,{get_base64("assets/home_img1.jpg")}">
                 </div>
             <div class="textcontainer">
                 <div class="title momo-trust-display-regular">Spelling Bee</div>
@@ -594,7 +623,7 @@ def home():
 
         <div class="homecontainer2">   
             <div class="imgcontainer2">
-                <img class="img2" src="data:image/jpg;base64,{get_base64("assets/missing_texture.png")}">
+                <img class="img2" src="data:image/jpg;base64,{get_base64("assets/home_img2.jpg")}">
             </div>
             <div class="textcontainer">
                 <div class="title momo-trust-display-regular">Sejarah Awal</div>
@@ -610,12 +639,22 @@ def home():
         </div>
 
         <div class="homecontainer"> 
-                <div class="imgcontainer">
-                    <img class="img1" src="data:images/jpg;base64,{get_base64("assets/missing_texture.png")}">
+                <div class="imgcontainer3">
+                    <img class="img1" src="data:images/jpg;base64,{get_base64("assets/home_img3.jpg")}">
                 </div>
             <div class="textcontainer">
                 <div class="title momo-trust-display-regular">Tujuan dan Manfaat</div>
                 <p class="arima-isi">{text5}</p>
             </div>
+        </div>
+        
+        <div class="creditcontainer rowdies-light">
+            Gambar 1 : By Heather Temske, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0" class="credit">CC BY 2.0</a> , <a href="https://commons.wikimedia.org/w/index.php?curid=37872924" class="credit">Link to original image</a>
+        </div>
+        <div class="creditcontainer rowdies-light">
+            Gambar 2 : <a href="https://www-businessinsider-com.translate.goog/winning-words-spelling-bee-1925-2017-5?_x_tr_sl=en&_x_tr_tl=id&_x_tr_hl=id&_x_tr_pto=imgs" class="credit">businessinsider.com</a>
+        </div>
+        <div class="creditcontainer rowdies-light">
+            Gambar 3 : <a href="https://www.admasyitoh.com/2024/11/manfaat-belajar-bahasa-inggris.html" class="credit">admasyitoh.com</a>
         </div>
     """)
