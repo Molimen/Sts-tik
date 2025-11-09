@@ -588,7 +588,7 @@ def home():
         justify-content: center;
         align-items: center;
         text-align: center;
-        font-size: .72em;
+        font-size: .7em;
         flex-wrap: nowrap;
         margin: 0;
         }}
@@ -650,7 +650,7 @@ def home():
         </div>
         
         <div class="creditcontainer rowdies-light">
-            Gambar 1 : By Heather Temske, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0" class="credit">CC BY 2.0</a> , <a href="https://commons.wikimedia.org/w/index.php?curid=37872924" class="credit">Link to original image</a>
+            Gambar 1 : By Heather Temske, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0" class="credit">CC BY 2.0</a> , <a href="https://commons.wikimedia.org/w/index.php?curid=37872924" class="credit">Link to image</a>
         </div>
         <div class="creditcontainer rowdies-light">
             Gambar 2 : <a href="https://www-businessinsider-com.translate.goog/winning-words-spelling-bee-1925-2017-5?_x_tr_sl=en&_x_tr_tl=id&_x_tr_hl=id&_x_tr_pto=imgs" class="credit">businessinsider.com</a>
