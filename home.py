@@ -589,6 +589,7 @@ def home():
         align-items: center;
         text-align: center;
         font-size: .72em;
+        flex-wrap: nowrap;
         margin: 0;
         }}
         </style>
