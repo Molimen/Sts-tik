@@ -114,7 +114,7 @@ def games_reset():
 ROUND = 15
 
 def games():
-    TIME_LIMIT = 10 if st.session_state.diff == "Easy" else 9 if st.session_state.diff == "Medium" else 8 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
+    TIME_LIMIT = 20 if st.session_state.diff == "Easy" else 18 if st.session_state.diff == "Medium" else 16 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
 
     st.markdown(f"""<div class="round-count rowdies-regular">Round: {'{:02d}'.format(st.session_state.round)}/{ROUND:02d}</div>
                 <style>
