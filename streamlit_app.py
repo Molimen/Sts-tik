@@ -666,7 +666,7 @@ elif params:
    (huruf besar atau kecil itu bebas, tapi jangan ada karakter lain selain huruf) <br> ------------------------- <br>
 3. Jika ejaan benar, peserta mendapat poin. Jika salah, tidak mendapat poin. <br> ------------------------- <br>
 4. Ada batas waktu untuk mengejaan kata tersebut. <br>
-    Easy = 10 detik<br>Medium = 9 detik<br>Hard = 8 detik<br>Extreme = 15 detik<br> ------------------------- <br>
+    Easy = 20 detik<br>Medium = 18 detik<br>Hard = 16 detik<br>Extreme = 15 detik<br> ------------------------- <br>
 5. Ada total 15 ronde permainan.
 """
 
@@ -1368,3 +1368,4 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
+
