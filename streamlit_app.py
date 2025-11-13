@@ -111,7 +111,7 @@ def games_reset():
     st.session_state.answer = []
     st.session_state.correct = 0
 
-ROUND = 15
+ROUND = 2
 
 def games():
     TIME_LIMIT = 20 if st.session_state.diff == "Easy" else 18 if st.session_state.diff == "Medium" else 16 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
@@ -219,7 +219,7 @@ def games():
         progress_placeholder.progress(elapsed / TIME_LIMIT)
         time.sleep(.5)
 
-    st.session_state.menu_select = 3
+    st.session_state.menu_select = 4
     st.rerun()
 
 params = st.query_params
@@ -246,13 +246,7 @@ if "correct" not in st.session_state:
 
 st.set_page_config(page_title="Spelling Bee", page_icon="assets/icon.png")
 
-st.markdown("""
-<style>
-div[data-testid="stStatusWidget"] div button {
-    display: none !important;
-}
-</style>
-""", unsafe_allow_html=True)
+#st.markdown("""<style>div[data-testid="stStatusWidget"] div button {    display: none !important;}</style>""", unsafe_allow_html=True)
 
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
@@ -391,6 +385,24 @@ button:hover {{
 }}
 """
 
+button_sidebar_games = f"""
+button {{
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/png;base64,{get_base64("assets/games.png")}');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    background-color: #66a0bd;
+    border: 0.2rem solid #24ADF2;
+    transition: 0.3s;
+}}
+button:hover {{
+    background-color: #1b4f91;
+    border: 3px solid #999999;
+}}
+"""
+
 button_sidebar_extras = f"""
 button {{
     width: 60px;
@@ -437,6 +449,21 @@ with st.sidebar:
         """
         <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
                 <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Utama</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    with stylable_container(key="sidebar_games", css_styles=button_sidebar_games):
+        if st.button("", key="sidebar_btn_games"):
+            st.query_params.clear()
+            st.query_params["select"] = "games"
+            games_reset()
+
+    st.markdown(
+        """
+        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Games</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -499,164 +526,166 @@ css_style = """
 
 if params.get("select", "") == "":
     home.home()
-    st.html(f"""
-            <div class="grand-divider-container">
-                <div class="divider-container">
-                    <div class="divider"></div>
-                </div>
-            </div>
-            
-            <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
-            
-            <style>
-            .grand-divider-container {{
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 1em;
-            padding-bottom: 0;
-            }}
-            
-            .rainbow-text {{
-            display: flex;
-            justify-content:center;
-            align-items:center;
-            font-size: 2rem;
-            text-align: center;
-            background-color: white;
-            background-clip: text;
-            color: transparent;
-            margin: 0;
-            animation: rainbow 5s linear infinite;
-            }}
-            
-            .text-container {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            }}
-            
-            .text-title {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.3em;
-            }}
-            
-            .text-content {{
-            text-align: center;
-            }}
-            
-            .divider-container, .divider-container2 {{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1px;
-            z-index: 1;
-            width: 100%;
-            height: .5rem;
-            position: relative;
-            margin: 3em;
-            margin-top: 1.25em;
-            }}
-            
-            .divider-container::before, .divider-container::after, .divider-container2::before, .divider-container2::after {{
-            transition: all 1s ease;
-            }}
-            .divider-container::before {{
-            content: "";
-            top: -197%;
-            width: 40px;
-            height: 40px;
-            background-color: #232324;
-            position: absolute;
-            transform: rotate(45deg);
-            animation: bg-divider-scale 7s ease-out infinite;
-            }}
-            .divider-container2::before {{
-            content: "";
-            content: "";
-            top: -197%;
-            width: 40px;
-            height: 40px;
-            background-color: #232324;
-            position: absolute;
-            transform: rotate(45deg);
-            animation: bg-divider-scale 7s ease-out reverse infinite;
-            }}
-            .divider-container::after {{
-            content: "";
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            position: absolute;
-            transform: rotate(45deg);
-            animation: divider-spin 7s ease infinite;
-            }}
-            .divider-container2::after {{
-            content: "";
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            position: absolute;
-            transform: rotate(45deg);
-            animation: divider-spin 7s ease reverse infinite;
-            }}
-            .divider {{
-            height: .35rem;
-            width: 100%;
-            background-image: linear-gradient(90deg, transparent, white,white, transparent);
-            margin: 1.5em 0;
-            }}
-            
-            @keyframes bee {{
-                0% {{
-                transform: rotate(-7deg);
-                }}
-                50% {{
-                transform: rotate(18deg);
-                }}
-            }}
-            @keyframes rainbow {{
-            0% {{background-color: white}}
-            12.5% {{background-color: red}}
-            25% {{background-color: orange}}
-            37.5% {{background-color: yellow}}
-            50% {{background-color: green}}
-            62.5% {{background-color: cyan}}
-            75% {{background-color: blue}}
-            87.5% {{background-color: purple}}
-            100% {{background-color: white}}
-            }}
-            
-            </style>
-            """)
-    st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
-                <style>
-                .heading4 {{
-                text-align: center;
-                }}
-                
-                sup {{
-                font-size: .55em;
-                }}
-                </style>
-                """, unsafe_allow_html=True)
-
-    with stylable_container(key="style", css_styles=css_style):
-        with stylable_container(key="center1",
-                                css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
-            if st.button("Mainin minigamenya!"):
-                st.query_params.clear()
-                st.query_params["select"] = "games"
-                st.set_page_config(layout="centered")
-                st.rerun()
 elif params:
     if params.get("select") == "games":
         match st.session_state.menu_select:
             case 0:
+                st.html(f"""
+                        <div class="grand-divider-container">
+                            <div class="divider-container">
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
+                        
+                        <style>
+                        .grand-divider-container {{
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding-top: 1em;
+                        padding-bottom: 0;
+                        }}
+                        
+                        .rainbow-text {{
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        font-size: 2rem;
+                        text-align: center;
+                        background-color: white;
+                        background-clip: text;
+                        color: transparent;
+                        margin: 0;
+                        animation: rainbow 5s linear infinite;
+                        }}
+                        
+                        .text-container {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        }}
+                        
+                        .text-title {{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.3em;
+                        }}
+                        
+                        .text-content {{
+                        text-align: center;
+                        }}
+                        
+                        .divider-container, .divider-container2 {{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        padding: 1px;
+                        z-index: 1;
+                        width: 100%;
+                        height: .5rem;
+                        position: relative;
+                        margin: 3em;
+                        margin-top: 1.25em;
+                        }}
+                        
+                        .divider-container::before, .divider-container::after, .divider-container2::before, .divider-container2::after {{
+                        transition: all 1s ease;
+                        }}
+                        .divider-container::before {{
+                        content: "";
+                        top: -197%;
+                        width: 40px;
+                        height: 40px;
+                        background-color: #232324;
+                        position: absolute;
+                        transform: rotate(45deg);
+                        animation: bg-divider-scale 7s ease-out infinite;
+                        }}
+                        .divider-container2::before {{
+                        content: "";
+                        content: "";
+                        top: -197%;
+                        width: 40px;
+                        height: 40px;
+                        background-color: #232324;
+                        position: absolute;
+                        transform: rotate(45deg);
+                        animation: bg-divider-scale 7s ease-out reverse infinite;
+                        }}
+                        .divider-container::after {{
+                        content: "";
+                        width: 20px;
+                        height: 20px;
+                        background-color: white;
+                        position: absolute;
+                        transform: rotate(45deg);
+                        animation: divider-spin 7s ease infinite;
+                        }}
+                        .divider-container2::after {{
+                        content: "";
+                        width: 20px;
+                        height: 20px;
+                        background-color: white;
+                        position: absolute;
+                        transform: rotate(45deg);
+                        animation: divider-spin 7s ease reverse infinite;
+                        }}
+                        .divider {{
+                        height: .35rem;
+                        width: 100%;
+                        background-image: linear-gradient(90deg, transparent, white,white, transparent);
+                        margin: 1.5em 0;
+                        }}
+                        
+                        @keyframes bee {{
+                            0% {{
+                            transform: rotate(-7deg);
+                            }}
+                            50% {{
+                            transform: rotate(18deg);
+                            }}
+                        }}
+                        @keyframes rainbow {{
+                        0% {{background-color: white}}
+                        12.5% {{background-color: red}}
+                        25% {{background-color: orange}}
+                        37.5% {{background-color: yellow}}
+                        50% {{background-color: green}}
+                        62.5% {{background-color: cyan}}
+                        75% {{background-color: blue}}
+                        87.5% {{background-color: purple}}
+                        100% {{background-color: white}}
+                        }}
+                        
+                        </style>
+                        """)
+                st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
+                            <style>
+                            .heading4 {{
+                            text-align: center;
+                            }}
+                            
+                            sup {{
+                            font-size: .55em;
+                            }}
+                            </style>
+                            """, unsafe_allow_html=True)
+
+                with stylable_container(key="style", css_styles=css_style):
+                    with stylable_container(key="center1",
+                                            css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
+                        if st.button("Mainin minigamenya!"):
+                            st.query_params.clear()
+                            st.query_params["select"] = "games"
+                            st.session_state.menu_select = 1
+                            st.set_page_config(layout="centered")
+                            st.rerun()
+            case 1:
                 instruction = """
 📜 Aturan Permainan: <br>
 
@@ -666,7 +695,7 @@ elif params:
    (huruf besar atau kecil itu bebas, tapi jangan ada karakter lain selain huruf) <br> ------------------------- <br>
 3. Jika ejaan benar, peserta mendapat poin. Jika salah, tidak mendapat poin. <br> ------------------------- <br>
 4. Ada batas waktu untuk mengejaan kata tersebut. <br>
-    Easy = 10 detik<br>Medium = 9 detik<br>Hard = 8 detik<br>Extreme = 15 detik<br> ------------------------- <br>
+    Easy = 20 detik<br>Medium = 18 detik<br>Hard = 16 detik<br>Extreme = 15 detik<br> ------------------------- <br>
 5. Ada total 15 ronde permainan.
 """
 
@@ -746,9 +775,9 @@ elif params:
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Saya sudah paham"):
-                            st.session_state.menu_select = 1
+                            st.session_state.menu_select = 2
                             st.rerun()
-            case 1:
+            case 2:
                 st.html(f"""
                         <div class="diff-container">
                             <div class='diff-title'></div>
@@ -1214,13 +1243,13 @@ elif params:
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                         if st.button("Play"):
-                            st.session_state.menu_select = 2
+                            st.session_state.menu_select = 3
                             st.session_state.time = math.floor(time.time())
                             st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                             st.rerun()
-            case 2:
-                games()
             case 3:
+                games()
+            case 4:
                 if st.session_state.round != ROUND:
                     st.markdown(f"""
                                 <div class="round-count rowdies-regular">Round: {'{:02d}'.format(st.session_state.round+1)}/{ROUND:02d}</div>
@@ -1296,7 +1325,7 @@ elif params:
                         with stylable_container(key="center1",
                                                 css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                             if st.button("Ready"):
-                                st.session_state.menu_select = 2
+                                st.session_state.menu_select = 3
                                 st.session_state.round += 1
                                 st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
                                 st.session_state.time = math.floor(time.time())
@@ -1360,7 +1389,6 @@ elif params:
                         with stylable_container(key="center1",
                                                 css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
                             if st.button("Back"):
-                                st.query_params.clear()
                                 games_reset()
                                 st.rerun()
 
