@@ -592,6 +592,15 @@ def home():
         flex-wrap: nowrap;
         margin: 0;
         }}
+
+        @keyframes bee {{
+            0% {{
+            transform: rotate(-7deg);
+            }}
+            50% {{
+            transform: rotate(18deg);
+            }}
+        }}
         </style>
         
         <div class="ultimate-container">

@@ -111,7 +111,7 @@ def games_reset():
     st.session_state.answer = []
     st.session_state.correct = 0
 
-ROUND = 2
+ROUND = 15
 
 def games():
     TIME_LIMIT = 20 if st.session_state.diff == "Easy" else 18 if st.session_state.diff == "Medium" else 16 if st.session_state.diff == "Hard" else 15 if st.session_state.diff == "EXTREME" else 0.11037
@@ -642,14 +642,6 @@ elif params:
                         margin: 1.5em 0;
                         }}
                         
-                        @keyframes bee {{
-                            0% {{
-                            transform: rotate(-7deg);
-                            }}
-                            50% {{
-                            transform: rotate(18deg);
-                            }}
-                        }}
                         @keyframes rainbow {{
                         0% {{background-color: white}}
                         12.5% {{background-color: red}}
