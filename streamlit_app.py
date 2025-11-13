@@ -246,7 +246,7 @@ if "correct" not in st.session_state:
 
 st.set_page_config(page_title="Spelling Bee", page_icon="assets/icon.png")
 
-#st.markdown("""<style>div[data-testid="stStatusWidget"] div button {    display: none !important;}</style>""", unsafe_allow_html=True)
+st.markdown("""<style>div[data-testid="stStatusWidget"] div button {    display: none !important;}</style>""", unsafe_allow_html=True)
 
 spelling_bee_words = {
     # 🍎 EASY — kata dasar, sehari-hari (±90 kata)
