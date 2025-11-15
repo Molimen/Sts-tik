@@ -153,7 +153,7 @@ def home():
                 z-index: 0;
                 padding: 15px;
                 border-radius: 10px;
-                animation: 2.25s rotatebg linear infinite;
+                animation: 5s rotatebg linear infinite;
                 }}
                 .imgcontainer::before{{
                 content: "";
@@ -196,12 +196,12 @@ def home():
                 }}
                 .imgcontainer2::before, .imgcontainer2::after {{
                 background-image: conic-gradient(from 0deg,#c22323,#8823c2,#2397c2,#c22323);
-                animation: 2.25s rotatebg linear reverse infinite;
+                animation: 5s rotatebg linear reverse infinite;
                 }} 
                 
                 .imgcontainer3::before, .imgcontainer3::after {{
                 background-image: conic-gradient(from 0deg, #d69d00,#00d6ab,#d6008f,#d69d00);
-                animation: 2.25s rotatebg linear infinite;
+                animation: 5s rotatebg linear infinite;
                 }}
 
                 @keyframes rotatebg {{

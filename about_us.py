@@ -342,6 +342,9 @@ def abt_us():
                 font-size: 0.85em;
                 margin: .95em;
                 }}
+                .info-title1::after, .info-title2::after {{
+                font-size: 0.85em;
+                }}
             }}
 
             @media (max-width: 768px) {{

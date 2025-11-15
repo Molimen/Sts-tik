@@ -376,7 +376,7 @@ button {{
     background-size: 40px;
     background-position: center;
     background-color: #66a0bd;
-    border: 0.2rem solid #24ADF2;
+    border: 0.2rem solid #003dbf;
     transition: 0.3s;
 }}
 button:hover {{
@@ -394,7 +394,7 @@ button {{
     background-size: 40px;
     background-position: center;
     background-color: #66a0bd;
-    border: 0.2rem solid #24ADF2;
+    border: 0.2rem solid #003dbf;
     transition: 0.3s;
 }}
 button:hover {{
@@ -412,7 +412,7 @@ button {{
     background-size: 40px;
     background-position: center;
     background-color: #66a0bd;
-    border: 0.2rem solid #24ADF2;
+    border: 0.2rem solid #003dbf;
     transition: 0.3s;
 }}
 button:hover {{
@@ -430,7 +430,7 @@ button {{
     background-size: 40px;
     background-position: center;
     background-color: #66a0bd;
-    border: 0.2rem solid #24ADF2;
+    border: 0.2rem solid #003dbf;
     transition: 0.3s;
 }}
 button:hover {{
@@ -447,8 +447,8 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
-                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Utama</span>
+        <div class='rowdies-light' style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Pengenalan</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -462,8 +462,8 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
-                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Games</span>
+        <div class='rowdies-light' style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+                <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Minigame</span>
         </div>
         """,
         unsafe_allow_html=True
@@ -478,7 +478,7 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+        <div class='rowdies-light' style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
                 <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Ekstra</span>
         </div>
         """,
@@ -494,7 +494,7 @@ with st.sidebar:
 
     st.markdown(
         """
-        <div style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
+        <div class='rowdies-light' style='display:flex; justify-content:center; align-items:center; padding:1px;padding-bottom: 30px;'>
                 <span style='text-align: center;font-size:0.8rem;line-height:1rem;'>Tentang kami</span>
         </div>
         """,
@@ -531,6 +531,22 @@ elif params:
         match st.session_state.menu_select:
             case 0:
                 st.html(f"""
+                        <div class="game-title">
+                            <!-- From Uiverse.io by kennyotsu --> 
+                            <div class="card">
+                              <div class="loader">
+                                <p class="static-word">Permainan</p>
+                                <div class="words">
+                                  <span class="word">spelling</span>
+                                  <span class="word">bee 🐝</span>
+                                  <span class="word">spelling</span>
+                                  <span class="word">bee 🐝</span>
+                                  <span class="word">spelling</span>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        
                         <div class="grand-divider-container">
                             <div class="divider-container">
                                 <div class="divider"></div>
@@ -540,6 +556,13 @@ elif params:
                         <div class="rainbow-text momo-trust-display-regular">Cobain minigame Spelling Bee!</div>
                         
                         <style>
+                        .game-title {{
+                        height: auto;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        }}
+                        
                         .grand-divider-container {{
                         position: relative;
                         display: flex;
@@ -559,6 +582,7 @@ elif params:
                         background-clip: text;
                         color: transparent;
                         margin: 0;
+                        margin-top: -15px;
                         animation: rainbow 5s linear infinite;
                         }}
                         
@@ -604,7 +628,6 @@ elif params:
                         background-color: #232324;
                         position: absolute;
                         transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out infinite;
                         }}
                         .divider-container2::before {{
                         content: "";
@@ -615,7 +638,6 @@ elif params:
                         background-color: #232324;
                         position: absolute;
                         transform: rotate(45deg);
-                        animation: bg-divider-scale 7s ease-out reverse infinite;
                         }}
                         .divider-container::after {{
                         content: "";
@@ -624,7 +646,6 @@ elif params:
                         background-color: white;
                         position: absolute;
                         transform: rotate(45deg);
-                        animation: divider-spin 7s ease infinite;
                         }}
                         .divider-container2::after {{
                         content: "";
@@ -633,7 +654,6 @@ elif params:
                         background-color: white;
                         position: absolute;
                         transform: rotate(45deg);
-                        animation: divider-spin 7s ease reverse infinite;
                         }}
                         .divider {{
                         height: .35rem;
@@ -654,6 +674,131 @@ elif params:
                         100% {{background-color: white}}
                         }}
                         
+                        /* From Uiverse.io by kennyotsu */ 
+                        .card {{
+                          /* color used to softly clip top and bottom of the .words container */
+                          --bg-color: #111;
+                          background-color: var(--bg-color);
+                          padding: 1rem 2rem;
+                          border-radius: 0rem;
+                          border: 5px solid #4d4d4d;
+                          position: relative;
+                        }}
+                        .card::before, .card::after {{
+                        content: "";
+                        position: absolute;
+                        transform: translate(-50%, -50%);
+                        top: 50%;
+                        
+                        }}
+                        .card::before {{
+                        background-color: #3d6aff;
+                        height: 110%;
+                        width: 2.5em;
+                        left: -12%;
+                        border-radius: 1rem 0 0 1rem;
+                        box-shadow: inset 0.5rem 0rem 1rem black;
+                        }}
+                        .card::after {{
+                        background-color: #ff3224;
+                        height: 112%;
+                        width: 2.5em;
+                        right: -25%;
+                        border-radius: 0 1rem 1rem 0;
+                        box-shadow: inset 0.5rem 0.5rem 1rem #4f0500;
+                        }}
+                        .loader {{
+                          color: rgb(124, 124, 124);
+                          font-family: "Rowdies", sans-serif;
+                          font-weight: 500;
+                          font-size: 25px;
+                          -webkit-box-sizing: content-box;
+                          box-sizing: content-box;
+                          height: 40px;
+                          padding: 5px 5px;
+                          display: -webkit-box;
+                          display: -ms-flexbox;
+                          display: flex;
+                          border-radius: 8px;
+                        }}
+                        .static-word {{
+                        transform: translate(0, 0%);
+                        font-size: 25px;
+                        color: #856f05;
+                        }}
+                        
+                        .words {{
+                          overflow: hidden;
+                          position: relative;
+                        }}
+                        .words::after {{
+                          content: "";
+                          position: absolute;
+                          inset: 0;
+                          background: linear-gradient(
+                            var(--bg-color) 10%,
+                            transparent 30%,
+                            transparent 70%,
+                            var(--bg-color) 90%
+                          );
+                          z-index: 20;
+                        }}
+                        
+                        .word {{
+                          display: block;
+                          height: 100%;
+                          padding-left: 6px;
+                          color: #bfa41d;
+                          animation: spin_4991 4s infinite;
+                        }}
+                        
+                        @keyframes spin_4991 {{
+                          10% {{
+                            -webkit-transform: translateY(-102%);
+                            transform: translateY(-102%);
+                          }}
+                        
+                          25% {{
+                            -webkit-transform: translateY(-100%);
+                            transform: translateY(-100%);
+                          }}
+                        
+                          35% {{
+                            -webkit-transform: translateY(-202%);
+                            transform: translateY(-202%);
+                          }}
+                        
+                          50% {{
+                            -webkit-transform: translateY(-200%);
+                            transform: translateY(-200%);
+                          }}
+                        
+                          60% {{
+                            -webkit-transform: translateY(-302%);
+                            transform: translateY(-302%);
+                          }}
+                        
+                          75% {{
+                            -webkit-transform: translateY(-300%);
+                            transform: translateY(-300%);
+                          }}
+                        
+                          85% {{
+                            -webkit-transform: translateY(-402%);
+                            transform: translateY(-402%);
+                          }}
+                        
+                          100% {{
+                            -webkit-transform: translateY(-400%);
+                            transform: translateY(-400%);
+                          }}
+                        }}
+                        
+                        @media (max-width: 400px) {{
+                            .card::before, .card::after {{
+                            display: none;
+                            }}
+                        }}
                         </style>
                         """)
                 st.markdown(f"""<h4 class="heading4">Score: {'{:.2f}'.format(st.session_state.score)}<br><sup>(skornya gak permanen btw)</sup></h4>
@@ -1234,7 +1379,7 @@ elif params:
                                 </style>""")
                 with stylable_container(key="style", css_styles=css_style):
                     with stylable_container(key="center1",css_styles='''{display: flex; justify-content: center;align-items: center;font-weight: bold;}'''):
-                        if st.button("Play"):
+                        if st.button("Mulai permainan"):
                             st.session_state.menu_select = 3
                             st.session_state.time = math.floor(time.time())
                             st.session_state.word = random.choice(spelling_bee_words.get("easy" if st.session_state.diff == "Easy" else "medium" if st.session_state.diff == "Medium" else "Hard" if st.session_state.diff == "Hard" else "extreme" if st.session_state.diff == "EXTREME" else ""))
@@ -1388,4 +1533,3 @@ elif params:
         extra.extra_menu()
     elif params.get("select") == "about":
         about_us.abt_us()
-

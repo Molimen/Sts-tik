@@ -138,7 +138,7 @@ def extra_menu():
                 z-index: 0;
                 padding: 15px;
                 border-radius: 10px;
-                animation: 6s rotatebg linear infinite;
+                animation: 15s rotatebg linear infinite;
                 }}
                 .imgcontainer::before{{
                 content: "";
@@ -175,7 +175,7 @@ def extra_menu():
                 padding: 10px;
                 border-radius: 10px;
                 overflow: hidden;
-                animation: 6s rotatebg linear infinite;
+                animation: 13s rotatebg linear infinite;
                 }}
                 .imgcontainer2::before{{
                     filter: blur(1em);
@@ -202,8 +202,8 @@ def extra_menu():
         .linkbtn {{ 
         margin: 1em 1em 1em 1em;
         border-radius: 99px;
-        background-color: #66a0bd;
-        border: 4px solid #24ADF2;
+        background-color: #8346bd;
+        border: 4px solid #7102d9;
         padding: 10px 0;
         position: relative;
         overflow: hidden;
